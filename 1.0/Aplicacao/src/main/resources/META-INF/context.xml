@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+<!--CONTEXTO PARA EXECUCAO LOCAL sem JNDI
+	<Context path="/ouvidoria" reloadable="true" swallowOutput="true">
+	<Logger className="org.apache.catalina.logger.FileLogger" prefix="ouvidoria." suffix=".log" timestamp="true" />
+	<Resource name="jdbc/ouvidoria" type="javax.sql.DataSource" />
+	<ResourceParameters name="jdbc/ouvidoria">
+	<parameter>
+	<name>factory</name>
+	<value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+	</parameter>
+	<parameter>
+	<name>url</name>
+	<value>jdbc:mysql://localhost:3306/ouvidoria</value>
+	</parameter>
+	<parameter>
+	<name>driverClassName</name>
+	<value>com.mysql.jdbc.Driver</value>
+	</parameter>
+	<parameter>
+	<name>username</name>
+	<value>ouvidor</value>
+	</parameter>
+	<parameter>
+	<name>password</name>
+	<value>ouvidor</value>
+	</parameter>
+	</ResourceParameters>
+	</Context>
+-->
+
+<!-- CONTEXTO PARA EXECUCAO LOCAL com JNDI -->	
+	<!-- 
+	<Context path="/sistemaouvidoria" docBase="sistemaouvidoria" debug="0" privileged="false">
+	
+	<Valve className="org.apache.catalina.valves.AccessLogValve" prefix="sistemaouvidoria_acess_log." suffix=".txt" pattern="common" />
+	
+	<Logger className="org.apache.catalina.logger.FileLogger" prefix="sistemaouvidoria_log." suffix=".txt" timestamp="true" />
+	
+	<Resource name="jdbc/ouvidoria" type="javax.sql.DataSource" />
+	
+	<ResourceLink name="jdbc/ouvidoria" global="jdbc/ouvidoria" type="javax.sql.DataSource" />
+	
+	<ResourceParams name="jdbc/ouvidoria">
+	<parameter>
+	<name>factory</name>
+	<value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+	</parameter>
+	
+	<parameter>
+	<name>url</name>
+	<value>jdbc:mysql://psc03.sdr.serpro:3306/ouvidoria_inpi</value>
+	</parameter>
+	
+	<parameter>
+	<name>driverClassName</name>
+	<value>com.mysql.jdbc.Driver</value>
+	</parameter>
+	
+	<parameter>
+	<name>username</name>
+	<value>scsdr</value>
+	</parameter>
+	
+	<parameter>
+	<name>password</name>
+	<value>scsdr</value>
+	</parameter>
+	
+	<parameter>
+	<name>poolPreparedStatements</name>
+	<value>true</value>
+	</parameter>
+	
+	<parameter>
+	<name>initialSize</name>
+	<value>5</value>
+	</parameter>
+	
+	<parameter>
+	<name>maxWait</name>
+	<value>1000</value>
+	</parameter>
+	
+	<parameter>
+	<name>maxIdle</name>
+	<value>150</value>
+	</parameter>
+	
+	<parameter>
+	<name>minIdle</name>
+	<value>5</value>
+	</parameter>
+	
+	<parameter>
+	<name>maxActive</name>
+	<value>100</value>
+	</parameter>
+	</ResourceParams>
+	</Context>
+	 -->
+ 
+<!-- CONTEXTO PARA EXECUCAO NA HOMOLOGACAO DO SERPRO 
+
+<Context path="/sistemaouvidoria" docBase="sistemaouvidoria" debug="0" privileged="false">
+
+	<Valve className="org.apache.catalina.valves.AccessLogValve" prefix="sistemaouvidoria_acess_log." suffix=".txt" pattern="common" />
+
+	<Logger className="org.apache.catalina.logger.FileLogger" prefix="sistemaouvidoria_log." suffix=".txt" timestamp="true" />
+
+	<Resource name="jdbc/ouvidoria" type="javax.sql.DataSource" />
+
+	<ResourceParams name="jdbc/ouvidoria">
+		<parameter>
+			<name>factory</name>
+			<value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+		</parameter>
+
+		<parameter>
+			<name>url</name>
+			<value>jdbc:mysql://161.148.173.170/Dbh_99015_Ouvidoria</value>
+		</parameter>
+
+		<parameter>
+			<name>driverClassName</name>
+			<value>com.mysql.jdbc.Driver</value>
+		</parameter>
+
+		<parameter>
+			<name>username</name>
+			<value>usrh_ouvidor</value>
+		</parameter>
+
+		<parameter>
+			<name>password</name>
+			<value>9745ouvidoriapp</value>
+		</parameter>
+
+		<parameter>
+			<name>poolPreparedStatements</name>
+			<value>true</value>
+		</parameter>
+
+		<parameter>
+			<name>initialSize</name>
+			<value>5</value>
+		</parameter>
+
+		<parameter>
+			<name>maxWait</name>
+			<value>1000</value>
+		</parameter>
+
+		<parameter>
+			<name>maxIdle</name>
+			<value>150</value>
+		</parameter>
+
+		<parameter>
+			<name>minIdle</name>
+			<value>5</value>
+		</parameter>
+
+		<parameter>
+			<name>maxActive</name>
+			<value>100</value>
+		</parameter>
+	</ResourceParams>
+</Context>
+
+-->

@@ -1,0 +1,172 @@
+<HTML>
+
+<head>
+<link rel="stylesheet"  media="all" href="../estilos/estilo_ajuda.css" type="text/css">
+<script language='javascript'>
+
+function onLoad(){
+	try { document.getElementById("imgTela").focus() } catch(e) {};
+}
+</script>
+</head>		
+
+	
+<body onload="javascript:onLoad();">
+	
+<img src="../images/ajuda/help_38.jpg" tabindex="1" name="imgTela" id="imgTela" 
+	     alt="Tela da funcionalidade" >
+
+<div tabindex="2">
+<DT><b> Funcionalidade </b> </DT><br>
+<DD>Possibilita a manutenção  do cadastro de Scripts<br></DD>
+</div>
+
+<br>
+<div tabindex="3">
+<DT><b><a name=busca>1 - Busca de Scripts<a></b></DT><br>
+	<DD>Serve para buscar scripts específicos dentre os cadastrados, listando apenas os que correspondem
+	ao critério de busca selecionado.</DD><br>
+	<DD>Os critérios possíveis são:</DD><br>
+	<DD><DD>
+		<table width="85%">
+		<tr>
+			<td width="40%" align="left"><b>Tipo de Assunto</b></td>
+			<td width="60%" align="left">identificados numa lista</td>		
+		</tr>
+		<tr>
+			<td valign="top"><b>Palavra-chave</b></td>
+			<td>será comparada com o conteúdo do título e da descrição dos scripts disponíveis</td>		
+		</tr>
+	</table>
+    </DD></DD>
+     <DD>Após o fornecimento dos critérios de busca deve-se utilizar a Lupa, ou a tecla Enter, para
+	   que o sistema traga os scripts filtrados.</DD>													 
+     <DD>O botão "Novo Script" permite que sejam incluídos novos scripts no banco.</DD>
+</div>
+
+<br>
+
+<div tabindex="4">
+<DT><b><a name="lista">2 - Lista de Scripts<a></b></DT><br>
+<DD>Local onde são mostrados os scripts filtrados pelos critérios fornecidos. São presentados os dados:</DD>
+<DD>
+	<table width="85%">
+		<tr>
+			<td width="40%" align="left"><b>Código</b></td>
+			<td width="60%" align="left">Sequencial de identificação do script</td>		
+		</tr>
+		<tr>
+			<td><b>Descrição</b></td>
+			<td>Identificação (título) do Script</td>		
+		</tr>
+		<tr>
+			<td valign="top"><b>Situação</b></td>
+			<td>Aprovado (quando o script tiver sido aprovado pelo ouvidor), reprovado (script reprovado pelo ouvidor),		
+                    pendente (script aguardando avaliação do ouvidor) ou inativo (quando o script tiver sido desativado no sistema, podendo ser utilizado apenas para fins estatísticos ou como informação para o Gestor de Conteúdo)</td>		
+		</tr>
+	</table>
+</DD>
+<br>
+<DD>2.1 - Está disponível o recurso de paginação com as operações:</DD><br>
+<DD>
+<!--
+<iframe src='paginacao.html' id="fmePaginacao" name='fmePaginacao' longdesc='Paginação' 
+	frameborder='0' width='100%' height='45%' >
+</iframe>
+-->
+
+<!--  Paginação -->
+<table>
+	<tr>
+		<td colspan="2" align="center"> <img src="../images/ajuda/navega_paginacao.jpg"  name="imgPaginacao" id="imgPaginacao" 
+	     alt='Paginação' >
+</td>
+	</tr>
+	<tr>
+		<td width="40%" align="left" valign="top">a)&nbsp;<b>Primeira página</b></td>
+		<td width="60%" align="left">Lista os registros da página inicial</td>		
+	</tr>
+	<tr>
+		<td valign="top">b)&nbsp;<b>Página anterior</b></td>
+		<td>Lista os registros da página anterior</td>		
+	</tr>
+	<tr>
+		<td valign="top">c)&nbsp;<b>Ir para a página</b></td>
+		<td>Lista os registros da página diretamente selecionada</td>		
+	</tr>
+	<tr>
+		<td valign="top">d)&nbsp;<b>Próxima página</b></td>
+		<td>Lista os registros da próxima página</td>		
+	</tr>
+	<tr>
+		<td valign="top">e)&nbsp;<b>Última página</b></td>
+		<td>Lista os registros da última página</td>		
+	</tr>
+</table>
+<!--  Fim Paginação -->
+
+</DD>
+</div>
+
+<br>
+<div tabindex="5">
+<DT><b><a name=detalhe>3 - Detalhamento de Scripts<a></b></DT><br>
+
+<DD>Neste espaço realizam-se operações sobre os dados do Script. As operações possíveis são:</DD>
+<DD><DD>
+	<table width="85%">
+		<tr>
+			<td width="40%" align="left" valign="top"><b>Inclusão</b></td>
+			<td width="60%" align="left">Criação de novo script</td>		
+		</tr>
+		<tr>
+			<td valign="top"><b>Alteração</b></td>
+			<td>Alteração dos dados do script já existente</td>		
+		</tr>
+	</table>
+</DD></DD><br>
+<DD>Os dados disponíveis para alteração são:</DD>
+<DD><DD>
+	<table width="85%">
+		<tr>
+			<td width="40%" align="left" valign="top"><b>Tipo de Assunto</b></td>
+			<td width="60%" align="left">Lista com os tipos de assunto ao qual o script pode pertencer</td>		
+		</tr>
+		<tr>
+			<td><b>Indetificação</b></td>
+			<td>Título do script</td>		
+		</tr>
+		<tr>
+			<td><b>Texto</b></td>
+			<td>Descrição do script</td>		
+		</tr>
+	</table>
+</DD></DD><br>
+<DD>Estão disponíveis três botões que operam sobre o script:</DD>
+<DD><DD>
+	<table width="85%">
+		<tr>
+			<td width="40%" align="left" valign="top"><b>Alterar</b></td>
+			<td width="60%" align="left">Altera os dados do script após pedido de confirmação</td>		
+		</tr>
+		<tr>
+			<td valign="top"><b>Excluir</b></td>
+			<td>Exclui os dados do script após pedido de confirmação</td>		
+		</tr>
+		<tr>
+			<td valign="top"><b>Salvar</b></td>
+			<td>Salva os dados do novo script após pedido de confirmação</td>		
+		</tr>
+	</table>
+</DD></DD><br>
+
+</div>
+
+<hr >
+  <p class="voltar"><A title="imprimir esta página" href="javascript:window.print()" tabindex="10">imprimir</A> 
+    . <A title="topo da página" href="javascript:window.location=location.href;" tabindex="11">topo</A>
+
+	
+</body>	
+
+</HTML>

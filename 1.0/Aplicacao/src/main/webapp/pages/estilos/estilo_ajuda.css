@@ -1,0 +1,65 @@
+hr {  color: #1C1C1C; background-color: #1C1C1C; height: 3px; border-color: black black #1C1C1C; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px }
+
+.voltar {  text-align: right; margin-top: -0.5em; font-weight: bold; color:#FF0000 }
+
+img { border: 0 }
+
+a         { color: #000000; text-decoration: none; font-family:Verdana; font-weight:bold; 	font-family:Verdana; 
+	font-size:8pt; 
+}
+a:link    { color: #000000; text-decoration: none; font-family:Verdana; font-weight:bold;	font-family:Verdana; 
+	font-size:8pt; 
+}
+a:visited { color: #000000; text-decoration: none; font-family:Verdana; font-weight:bold;	font-family:Verdana; 
+	font-size:8pt; 
+}
+a:hover   { color: #000000; text-decoration: none; font-family:Verdana; font-weight:bold;	font-family:Verdana; 
+	font-size:8pt; 
+}
+a:active  { color: #000000; text-decoration: none; font-family:Verdana; font-weight:bold;	font-family:Verdana; 
+	font-size:8pt; 
+} 
+
+.contentBold {
+	font-weight: bold;
+	text-align: auto
+}
+
+.contentRight {
+	text-align: right
+}
+
+.contentCenter {
+	text-align: center
+}
+
+.contentRed {
+	color: E70400
+}
+
+.contentBlueVerdana {
+	color: #3333FF;
+	font-family:Verdana; 
+	font-size:8pt; 
+}
+
+.contentRedVerdana {
+	color: E70400;
+	font-family:Verdana; 
+	font-size:8pt; 
+}
+
+.contentBlackVerdana {
+color: #000000;
+font-family:Verdana; 
+font-size:8pt; 
+}
+
+.boldCor{
+font-weight:bold;
+color: #0065FF;
+}
+
+
+
+

@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+	
+		<!-- Atualizar Banco de Scripts -->
+        <form-bean dynamic="true" name="ListarBancoScriptsForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="txtAssunto" type="java.lang.String" />
+            <form-property name="txtChave"   type="java.lang.String" />
+            <form-property name="txtEstado"  type="java.lang.String" />
+        </form-bean>
+
+		<!-- Action Form para confirmação de alteração/inclusão de Script  -->
+        <form-bean dynamic="true" name="ConfirmaScriptForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="idScript"       type="java.lang.String" />
+            <form-property name="txtTitulo"      type="java.lang.String" />
+	    	<form-property name="txtAssunto"  	 type="java.lang.String" />
+	    	<form-property name="txtTexto" 		 type="java.lang.String" />
+	    	<form-property name="txtAcao" 		 type="java.lang.String" />
+        </form-bean>        
+        
+		<!-- Atualizar Banco de Solucoes -->
+        <form-bean dynamic="true" name="ListarBancoSolucoesForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="txtAssunto" type="java.lang.String" />
+            <form-property name="txtChave"   type="java.lang.String" />
+            <form-property name="idEstadoSolucao"  type="java.lang.String" />
+        </form-bean>
+        
+		<!-- Action Form para confirmação de alteração/inclusão de Script  -->
+        <form-bean dynamic="true" name="SolucaoForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="idSolucao"      type="java.lang.String" />
+            <form-property name="txtTitulo"      type="java.lang.String" />
+	    	<form-property name="txtAssunto"  	 type="java.lang.String" />
+	    	<form-property name="txtTexto" 		 type="java.lang.String" />
+	    	<form-property name="txtDatVigencia" type="java.lang.String" />
+			<form-property name="txtHoraVigencia" type="java.lang.String" />
+        </form-bean>        
+
+		<!-- Action Form para Autorizar Script -->
+        <form-bean dynamic="true" name="AutorizarScriptForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="idScript"  type="java.lang.String" />
+            <form-property name="txtObs"    type="java.lang.String" />
+        </form-bean>
+
+		<!-- Action Form para Autorizar Solução [SM - 98586]-->
+        <form-bean dynamic="true" name="AutorizarSolucaoForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="idSolucao"  type="java.lang.String" />
+            <form-property name="txtObs"    type="java.lang.String" />
+        </form-bean>
+
+		<!-- Action Form para Administrar Configurações do Orgao -->
+    	<form-bean 	dynamic="true" name="AtualizarConfiguracoesOrgaoForm" 
+    				type="br.gov.serpro.ouvidoria.struts.form.CadastrarConfiguracoesOrgaoForm">
+    	</form-bean>
+
+		<!-- Action Form para Administrar Configurações do Funcinario -->
+    	<form-bean 	dynamic="false" name="CadastrarFuncionarioForm" 
+    				type="br.gov.serpro.ouvidoria.struts.form.CadastrarFuncionarioForm"/>
+
+		<!-- Action Form para Manter Parâmetros Gerais -->
+        <form-bean dynamic="true" name="ParametrosGeraisForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="idParametro"    	       type="java.lang.String" />        
+            <form-property name="txtHostEmail"  	       type="java.lang.String" />
+            <form-property name="txtTempoLimite"  	       type="java.lang.String" />
+            <form-property name="txtExtensaoNaoPermitida"  type="java.lang.String" />
+            <form-property name="txtExtensaoPermitida"     type="java.lang.String" />
+            <form-property name="txtDirContexto"           type="java.lang.String" />
+            <form-property name="txtlimiteColunaIndicadores" type="java.lang.String" />
+            <form-property name="limiteFalhasLogin"        type="java.lang.String" />            
+            <form-property name="tempoBloqueioLogin"       type="java.lang.String" />                        
+        </form-bean>		
+		
+		<!-- Action Form para Consulta à Mensagens Respondidas -->
+        <form-bean dynamic="true" name="ListaMsgRespondidaForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="txtDataIni"     type="java.lang.String" />
+			<form-property name="txtDataFim"     type="java.lang.String" />
+	    	<form-property name="txtAssunto"  	 type="java.lang.String" />
+	    	<form-property name="txtTipoMsg" 	 type="java.lang.String" />
+	    	<form-property name="txtTexto" 		 type="java.lang.String" />
+        </form-bean>        
+		
+		<!-- Action Form para Consulta à Usuários por Perfil -->
+        <form-bean dynamic="true" name="ListaUsuarioPerfilForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="txtPerfil"          type="java.lang.String" />
+        </form-bean>        		
+				
+		<!-- Atualizar Grupos de Email -->
+        <form-bean dynamic="true" name="ListarGruposEmailForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="txtDatIni"  type="java.lang.String" />
+			<form-property name="txtDatFim" type="java.lang.String" />
+            <form-property name="txtChave"   type="java.lang.String" />
+        </form-bean>
+
+		<!-- Action Form para confirmação de alteração/inclusão de Grupos de Email  -->
+        <form-bean dynamic="true" name="ConfirmaGruposEmailForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="idGrupoEmail"       type="java.lang.String" />
+            <form-property name="txtDscGrupo"        type="java.lang.String" />
+	    	<form-property name="txtDscListaEmail"   type="java.lang.String" />
+        </form-bean>        
+        
+		<form-bean dynamic="true" name="indicadoresInternosForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="r_modo_exibicao"   initial="" type="java.lang.String" />
+			<form-property name="sel_tabela"   initial="" type="java.lang.String" />
+			<form-property name="sel_itens_tabela"   initial="" type="java.lang.String[]" />
+			<form-property name="txt_periodo_i"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_f"   initial="" type="java.lang.String" />
+			<form-property name="sel_tipo_grafico"   initial="" type="java.lang.String" />
+			<form-property name="r_base_x"   initial="" type="java.lang.String" />
+			<form-property name="txt_max_count"   initial="" type="java.lang.String" />
+			<form-property name="h_locais"  initial="" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean dynamic="true" name="indicadoresExternosForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="r_modo_exibicao"   initial="" type="java.lang.String" />
+			<form-property name="sel_indicador"   initial="" type="java.lang.String" />
+			<form-property name="sel_ouvidorias"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_i"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_f"   initial="" type="java.lang.String" />
+			<form-property name="sel_agrupamento"   initial="" type="java.lang.String" />
+			<form-property name="sel_tipo_grafico"   initial="" type="java.lang.String" />
+			<form-property name="txt_max_count"   initial="" type="java.lang.String" />
+			<form-property name="h_locais"  initial="" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean dynamic="true" name="indicadoresHistoricoForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="r_modo_exibicao"   initial="" type="java.lang.String" />
+			<form-property name="sel_indicador"   initial="" type="java.lang.String" />
+			<form-property name="sel_meio_envio"   initial="" type="java.lang.String[]" />
+			<form-property name="txt_meta"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_i"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_f"   initial="" type="java.lang.String" />
+			<form-property name="sel_agrupamento"   initial="" type="java.lang.String" />
+			<form-property name="sel_tipo_grafico"   initial="" type="java.lang.String" />
+			<form-property name="txt_max_count"   initial="" type="java.lang.String" />
+			<form-property name="h_locais"  initial="" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean dynamic="true" name="indicadoresFormulaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="r_modo_exibicao"   initial="" type="java.lang.String" />
+			<form-property name="txt_nome"   initial="" type="java.lang.String" />
+			<form-property name="sel_agrupamento"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_i"   initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_f"   initial="" type="java.lang.String" />
+			<form-property name="sel_tipo_grafico"   initial="" type="java.lang.String" />
+			<form-property name="txt_meta"   initial="" type="java.lang.String" />
+			<form-property name="txt_max_count"   initial="" type="java.lang.String" />
+			<form-property name="h_locais"  initial="" type="java.lang.String" />
+		</form-bean>
+
+	</form-beans>
+
+	<global-exceptions>
+
+		<exception 
+			handler="br.gov.serpro.ouvidoria.struts.CustomExceptionHandler"
+			scope="request"
+			type="java.lang.Throwable"
+			key="ouvidoria.error"/>
+
+	</global-exceptions>
+
+	
+	<global-forwards>
+
+		<forward
+			name="welcome"
+			path="/MainInternet.do"/>
+        
+		<forward 
+       		name="failure" 
+			path="/pages/Error.jsp" 
+			redirect="false" 
+			contextRelative="true" />
+	
+		
+	
+		<forward 
+       		name="exception" 
+			path="/pages/GlobalException.jsp" 
+			redirect="false" 
+			contextRelative="true" />
+	
+		<forward 
+        	name="vazio" 
+        	path="/Vazio.do"/>
+
+	</global-forwards>
+    
+	<action-mappings>
+		<action 
+			path="/Vazio"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/_blank.htm"/>
+		
+	    <!-- Ações de Atualização do Banco de Scripts -->  
+	    <action
+	    	path="/ConsultaScriptAtualizacao"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ConsultarScriptsAction"
+	        unknown="false"
+	        validate="false"
+	        roles="38">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ConsultaScripts.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>  
+	    
+		<!-- Exibe lista de scripts, adicionando o param editar="N" no link de visualizar -->
+	    <action
+	    	path="/VisualizaScriptAtualizacao"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ConsultarScriptsAction"
+	        unknown="false"
+	        validate="false"
+	        roles="54">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ConsultaScripts.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>  	   
+ 		<!-- /Exibe lista de scripts, adicionando o param editar="N" no linkde visualizar -->
+ 	    
+		<action 
+			attribute="ListarBancoScriptsForm"
+		    name="ListarBancoScriptsForm"
+		    path="/ListarBancoScripts"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarScriptsAction"
+		    parameter="action"
+		    unknown="false"
+		    validate="false"
+		    roles="38">
+		    
+		    <forward
+				name="success"
+			    path="/pages/gerencial/administracao/ListaScripts.jsp"
+			    redirect="false"
+			    contextRelative="true" />			
+		</action>
+				
+        <action
+            attribute="ConfirmaScriptForm"
+            name="ConfirmaScriptForm"        
+        	path="/AtualizarScript"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarScriptsAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="38">
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>						
+		</action>		
+
+		<action
+			path="/ExibeScripts"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirEntrarScriptAction"
+		    unknown="false"
+		    validate="false" 
+		    roles="38">
+		    
+		    <forward
+		    	name="success"
+		        path="/pages/gerencial/administracao/ExibeEntraDetalheScript.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+	    </action>
+	    	    
+		<!-- FIM - Ações de Atualização do Banco de Scripts -->  
+
+	    <!-- Ações de Atualização do Banco de Soluções -->  
+	    <action
+	    	path="/ConsultaSolucaoAtualizacao"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ConsultarSolucaoAdminAction"
+	        unknown="false"
+	        validate="false"
+	        roles="39">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ConsultaSolucoesAdmin.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+		<action 
+			attribute="ListarBancoSolucoesForm"
+		    name="ListarBancoSolucoesForm"
+		    path="/ListaSolucoesAtualizacao"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarSolucaoAction"
+		    parameter="action"
+		    unknown="false"
+		    validate="false"
+		    roles="39">
+		    
+		    <forward
+				name="success"
+			    path="/pages/gerencial/administracao/ListaSolucoesAdmin.jsp"
+			    redirect="false"
+			    contextRelative="true" />
+		</action>
+		
+		<action
+			path="/ExibeSolucoesAtualizacao"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirEntrarSolucaoAction"
+		    unknown="false"
+		    validate="false" 
+		    roles="39">
+		    
+		    <forward
+		    	name="success"
+		        path="/pages/gerencial/administracao/ExibeEntraDetalheSolucao.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+	    </action>		
+
+        <action
+            attribute="SolucaoForm"
+            name="SolucaoForm"        
+        	path="/AtualizarSolucao"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarSolucaoAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="39">
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>	
+			
+		</action>
+
+		<!-- FIM - Ações de Atualização do Banco de Soluções -->  
+	
+		<!-- Autorizar Solução -->
+		<action 
+			path="/ConsultarSolucoesPendentes"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarSolucoesPendentes.jsp"
+			roles="55"/>
+					
+	    <action
+	    	path="/ListarSolucoesPendentes"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ListarSolucoesPendentesAction"
+	        unknown="false"
+	        validate="false"
+	        roles="55">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ListaSolucoesPendentes.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+	    <action
+	    	path="/ExibirSolucaoPendente"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirSolucaoPendenteAction"
+	        unknown="false"
+	        validate="false"
+	        roles="55">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ExibeSolucaoPendente.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+        <action
+            attribute="AutorizarSolucaoForm"
+            name="AutorizarSolucaoForm"        
+        	path="/AutorizarSolucao"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AutorizarSolucaoAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="55">
+
+            <forward
+                name="success"
+                path="/pages/gerencial/administracao/ConsultarSolucoesPendentes.jsp"
+                redirect="false"
+                contextRelative="true" />
+		</action>
+
+		<!-- FIM Autorizar Solução -->
+		
+		<!-- Autorizar Scripts -->
+		<action 
+			path="/ConsultarScriptsPend"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarScriptsPend.jsp"
+			roles="33"/>
+					
+	    <action
+	    	path="/ListarScriptsPend"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ListarScriptsPendAction"
+	        unknown="false"
+	        validate="false"
+	        roles="33">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ListaScriptsPend.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+	    <action
+	    	path="/ExibirScriptPend"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirScriptPendAction"
+	        unknown="false"
+	        validate="false"
+	        roles="33">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ExibeScriptPend.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+        <action
+            attribute="AutorizarScriptForm"
+            name="AutorizarScriptForm"        
+        	path="/AutorizarScript"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AutorizarScriptAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="33">
+
+            <forward
+                name="success"
+                path="/pages/gerencial/administracao/ConsultarScriptsPend.jsp"
+                redirect="false"
+                contextRelative="true" />
+		</action>
+
+		<!-- FIM Autorizar Scripts -->
+
+	    <!-- Manter Parâmetros Gerais -->  
+	    <action
+	    	path="/ExibirParametrosGerais"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirParametrosGeraisAction"
+	        unknown="false"
+	        validate="false"
+	        roles="41">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ExibeParametrosGerais.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+        <action
+            attribute="ParametrosGeraisForm"
+            name="ParametrosGeraisForm"        
+        	path="/AtualizarParametrosGerais"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarParametrosGeraisAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="41">
+
+            <forward
+                name="success"
+                path="/pages/SuccessMessageParamGerais.jsp"
+                redirect="false"
+                contextRelative="true" />
+		</action>
+
+	    <!-- FIM - Manter Parâmetros Gerais -->  
+
+		<!--   Consultar Mensagens Respondidas -->		
+		<action
+	    	path="/ConsultaMsgRespondida"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ConsultarMsgRespondidaAction"
+	        unknown="false"
+	        validate="false"
+	        roles="15">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ConsultaMsgRespondida.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+		<action 
+			attribute="ListaMsgRespondidaForm"
+		    name="ListaMsgRespondidaForm"
+		    path="/ListaMsgRespondida"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ListarMsgRespondidaAction"
+		    parameter="action"
+		    unknown="false"
+		    validate="false"
+		    roles="15">
+		    
+		    <forward
+				name="success"
+			    path="/pages/gerencial/administracao/ListaMsgRespondida.jsp"
+			    redirect="false"
+			    contextRelative="true" />
+		</action>
+		
+		<action
+			path="/ExibeMsgRespondida"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ExibirMsgRespondidaAction"
+		    unknown="false"
+		    validate="false" 
+		    roles="15">
+		    
+		    <forward
+		    	name="success"
+		        path="/pages/gerencial/administracao/ExibeMsgRespondida.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+	    </action>	
+		
+		<!--  FIM - Consultar Mensagens Respondidas  -->
+		
+
+		<!--   Consultar Usuários por Perfil -->		
+		<action
+	    	path="/ConsultaUsuarioPerfil"
+	        scope="request"
+	        type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ConsultarUsuarioPerfilAction"
+	        unknown="false"
+	        validate="false"
+	        roles="23">
+	    
+	        <forward
+	        	name="success"
+	        	path="/pages/gerencial/administracao/ConsultaUsuarioPerfil.jsp"
+	        	redirect="false"
+	        	contextRelative="true" />
+	    </action>
+
+		<action 
+			attribute="ListaUsuarioPerfilForm"
+		    name="ListaUsuarioPerfilForm"
+		    path="/ListaUsuarioPerfil"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.ListarUsuarioPerfilAction"
+		    parameter="action"
+		    unknown="false"
+		    validate="false"
+		    roles="23">
+		    
+		    <forward
+				name="success"
+			    path="/pages/gerencial/administracao/ListaUsuarioPerfil.jsp"
+			    redirect="false"
+			    contextRelative="true" />
+		</action>				
+		<!--  FIM - Consultar Usuários por Perfil  -->		
+		
+		
+		<!-- FUNCIONALIDADE MANTER TABELA SUBORGÃO -->  
+
+		<action 
+			path="/ConsultarSubOrgao"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarSubOrgao.jsp"
+			roles="19"/>
+
+		<action 
+			path="/AtualizarSubOrgao"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarSubOrgaoAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="19">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarSubOrgao.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirSubOrgao.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+	    </action>
+
+		<!-- FUNCIONALIDADE MANTER TABELA LOCALIDADE DE OCORRENCIA -->  
+
+		<action 
+			path="/AtualizarLocalidadeOcorrencia"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarLocalidadeOcorrenciaAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="19">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarLocalidadeOcorrencia.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirLocalidadeOcorrencia.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/gerencial/administracao/MsgSucessoLocalidadeOcorrencia.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+	    </action>
+	
+		<!-- FUNCIONALIDADE MANTER TABELA TIPO DE MENSAGEM -->  
+
+		<action 
+			path="/ConsultarTipoMensagem"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarTipoMensagem.jsp"
+			roles="21"/>
+
+		<action 
+			path="/AtualizarTipoMensagem"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarTipoMensagemAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="21">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarTipoMensagem.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirTipoMensagem.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+	    </action>
+
+		<!-- FUNCIONALIDADE MANTER TABELA TIPO DE ASSUNTO -->  
+
+		<action 
+			path="/ConsultarTipoAssunto"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarTipoAssunto.jsp"
+			roles="20"/>
+
+		<action 
+			path="/AtualizarTipoAssunto"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarTipoAssuntoAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="20">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarTipoAssunto.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirTipoAssunto.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+	    </action>
+
+	<!-- FUNCIONALIDADE MANTER TABELA TIPO DE AVALIAÇÃO DE RESPOSTA -->  
+
+		<action 
+			path="/ConsultarTipoAvaliacaoResposta"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarTipoAvaliacaoResposta.jsp"
+			roles="18"/>
+
+		<action 
+			path="/AtualizarTipoAvaliacaoResposta"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarTipoAvaliacaoRespostaAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="18">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarTipoAvaliacaoResposta.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirTipoAvaliacaoResposta.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+	    </action>
+
+		<!-- FUNCIONALIDADE ADMINISTRAR ORGAO -->  
+
+		<action 
+			path="/AdministrarOrgao"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/AdministrarOrgao.jsp"
+			roles="40"/>
+
+		<action 
+			path="/AtualizarOrgao"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarOrgaoAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+		    roles="40">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarOrgao.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirOrgao.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+	    </action>
+
+		<!-- FUNCIONALIDADE ATUALIZAR CONFIGURAÇÕES DO ÓRGÃO -->  
+
+		<action 
+            attribute="AtualizarConfiguracoesOrgaoForm"
+            name="AtualizarConfiguracoesOrgaoForm"        
+			path="/AtualizarConfiguracoesOrgao"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarConfiguracoesOrgaoAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			roles="22">
+
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirConfiguracoesOrgao.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+	    </action>
+		
+		<!-- FUNCIONALIDADE ADMINISTRAR USUARIO -->  
+
+		<action 
+			path="/ConsultarUsuario"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/administracao/ConsultarUsuario.jsp"
+			roles="16"/>
+
+		<action 
+            attribute="CadastrarFuncionarioForm"
+            name="CadastrarFuncionarioForm"        
+			path="/AtualizarUsuario"
+		    type="br.gov.serpro.ouvidoria.struts.action.gerencial.administracao.AtualizarUsuarioAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			validate="false"
+			roles="16">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/gerencial/administracao/ListarUsuario.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/gerencial/administracao/ExibirUsuario.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+      		<forward
+		        name="error"
+		        path="/pages/Error.jsp"
+		        contextRelative="true" />
+
+		    
+
+		</action>
+
+		<action 
+			path="/IndicadoresInternos"
+			name="indicadoresInternosForm"
+			attribute="indicadoresInternosForm"
+		    scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresInternosControllerAction"
+		    unknown="false"
+    		validate="false"
+    		roles="27">
+        	
+        	<forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresInternos.jsp"
+                redirect="false"
+                contextRelative="true"/>
+                
+		</action>
+
+		<action
+            path="/IndicadoresInternosSearch"
+			name="indicadoresInternosForm"
+			attribute="indicadoresInternosForm"
+            scope="request"
+            type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresInternosAction"
+            unknown="false"
+            validate="false"
+            roles="27">
+    
+            <forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresInternos-results.jsp"
+                redirect="false"
+                contextRelative="true" />
+	
+			<forward
+                name="same"
+                path="/pages/gerencial/relatorios/IndicadoresError.jsp?redir=IndicadoresInternos.do"
+                redirect="false"
+                contextRelative="true" />
+                
+	    </action>
+
+		<action 
+			path="/IndicadoresExternos"
+			name="indicadoresExternosForm"
+			attribute="indicadoresExternosForm"
+		    scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresExternosControllerAction"
+		    unknown="false"
+    		validate="false">
+        	
+        	<forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresExternos.jsp"
+                redirect="false"
+                contextRelative="true" />
+                
+		</action>
+
+		<action
+            path="/IndicadoresExternosSearch"
+			name="indicadoresExternosForm"
+			attribute="indicadoresExternosForm"
+            scope="request"
+            type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresExternosAction"
+            unknown="false"
+            validate="false"
+            roles="27">
+    
+            <forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresExternos-results.jsp"
+                redirect="false"
+                contextRelative="true" />
+		
+			<forward
+                name="same"
+                path="/pages/gerencial/relatorios/IndicadoresError.jsp?redir=IndicadoresExternos.do"
+                redirect="false"
+                contextRelative="true" />
+                
+    	</action>
+    
+	    <action 
+			path="/IndicadoresHistorico"
+			name="indicadoresHistoricoForm"
+			attribute="indicadoresHistoricoForm"
+		    scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresHistoricoControllerAction"
+		    unknown="false"
+    		validate="false">
+        	
+        	<forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresHistorico.jsp"
+                redirect="false"
+                contextRelative="true" />
+                
+		</action>
+
+		<action
+            path="/IndicadoresHistoricoSearch"
+			name="indicadoresHistoricoForm"
+			attribute="indicadoresHistoricoForm"
+            scope="request"
+            type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresHistoricoAction"
+            unknown="false"
+            validate="false">
+    
+            <forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresHistorico-results.jsp"
+                redirect="false"
+                contextRelative="true" />
+		
+			<forward
+                name="same"
+                path="/pages/gerencial/relatorios/IndicadoresError.jsp?redir=IndicadoresHistorico.do"
+                redirect="false"
+                contextRelative="true" />
+                
+    	</action>
+
+	    <action 
+			path="/IndicadoresFormula"
+			name="indicadoresFormulaForm"
+			attribute="indicadoresFormulaForm"
+		    scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresFormulaControllerAction"
+		    unknown="false"
+    		validate="false">
+        	
+        	<forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresFormula.jsp"
+                redirect="false"
+                contextRelative="true" />
+                
+		</action>
+
+		<action
+            path="/IndicadoresFormulaSearch"
+			name="indicadoresFormulaForm"
+			attribute="indicadoresFormulaForm"
+            scope="request"
+            type="br.gov.serpro.ouvidoria.struts.action.gerencial.relatorios.IndicadoresFormulaAction"
+            unknown="false"
+            validate="false">
+    
+            <forward
+                name="success"
+                path="/pages/gerencial/relatorios/IndicadoresFormula-results.jsp"
+                redirect="false"
+                contextRelative="true" />
+		
+			<forward
+                name="same"
+                path="/pages/gerencial/relatorios/IndicadoresError.jsp?redir=IndicadoresFormula.do"
+                redirect="false"
+                contextRelative="true" />
+                
+	    </action>
+			
+		<!-- ACTION DE TESTE PARA INDICADORES -->
+		<action 
+			path="/IndicadoresInternosNew"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/gerencial/relatorios/IndicadoresInternos_New.jsp"/>
+		
+	</action-mappings>
+
+	<controller processorClass="br.gov.serpro.ouvidoria.struts.CustomRequestProcessor"
+       		contentType="text/html"/> 
+
+	<message-resources parameter="resources.application"/>
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+
+</struts-config>

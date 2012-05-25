@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+
+<!--
+     This is a blank Tiles definition file with a commented example.
+-->
+
+<tiles-definitions>
+
+    <!-- sample tiles definitions
+    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
+        <put name="title"  value="Sample Page Title" />
+        <put name="header" value="/common/header.jsp" />
+        <put name="menu"   value=".mainMenu" />
+        <put name="footer" value="/common/footer.jsp" />
+        <put name="body"   value=".portal.body" />
+    </definition>
+
+    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
+        <putList name="list" >
+            <add value=".menu.links" />
+            <add value=".menu.taglib.references" />
+            <add value=".menu.printer.friendly" />
+            <add value=".menu.old.documents" />
+      </putList>
+    </definition>
+
+    <definition name="aPage" extends=".mainLayout">
+        <put name="title"  value="Another Title" />
+        <put name="body"   value=".aPage.body" />
+    </definition>
+
+    end samples -->
+
+    <definition name="${YOUR_DEFINITION_HERE}">
+    </definition>
+
+</tiles-definitions>

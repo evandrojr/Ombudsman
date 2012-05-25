@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>	
+		<!-- Atualizar Grupos de Email -->
+        <form-bean dynamic="true" name="ListarGruposEmailForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="txtDatIni"  type="java.lang.String" />
+			<form-property name="txtDatFim" type="java.lang.String" />
+            <form-property name="txtChave"   type="java.lang.String" />
+        </form-bean>
+
+		<!-- Action Form para confirmação de alteração/inclusão de Grupos de Email  -->
+        <form-bean dynamic="true" name="ConfirmaGruposEmailForm" type="org.apache.struts.action.DynaActionForm">            
+            <form-property name="idGrupoEmail"       type="java.lang.String" />
+            <form-property name="txtDscGrupo"        type="java.lang.String" />
+	    	<form-property name="txtDscListaEmail"   type="java.lang.String" />
+        </form-bean>        		
+        
+        <form-bean dynamic="true" name="AtualizarBoletimForm" type="org.apache.struts.action.DynaActionForm">            
+	        <form-property name="txtBusca"        type="java.lang.String" />
+	        <form-property name="txtPeriodoIni"        type="java.lang.String" />
+	        <form-property name="txtPeriodoFim"        type="java.lang.String" />
+	        <form-property name="publicar"        type="java.lang.String" />        
+        </form-bean>
+        
+        <form-bean dynamic="true" name="AtualizarHistoricoEnvioForm" type="org.apache.struts.action.DynaActionForm">            
+        	<form-property name="grupo" type="java.lang.Integer" />
+        </form-bean>
+        
+	</form-beans>
+
+	<global-exceptions>
+
+		<exception 
+			handler="br.gov.serpro.ouvidoria.struts.CustomExceptionHandler"
+			scope="request"
+			type="java.lang.Throwable"
+			key="ouvidoria.error"/>
+
+	</global-exceptions>
+
+	
+	<global-forwards>
+
+		<forward
+			name="welcome"
+			path="/MainInternet.do"/>
+        
+		<forward 
+       		name="failure" 
+			path="/pages/Error.jsp" 
+			redirect="false" 
+			contextRelative="true" />
+	
+		<forward 
+       		name="error" 
+			path="/pages/Error.jsp" 
+			redirect="false" 
+			contextRelative="true" />
+	
+		<forward 
+       		name="exception" 
+			path="/pages/GlobalException.jsp" 
+			redirect="false" 
+			contextRelative="true" />
+	
+		<forward 
+        	name="vazio" 
+        	path="/Vazio.do"/>
+
+	</global-forwards>
+    
+	<action-mappings>
+
+		<action 
+			path="/Vazio"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/_blank.htm"/>
+		
+		<!-- FUNCIONALIDADE GERAR BOLETIM -->  
+
+		<action 
+			path="/ConsultarBoletim"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/aprendizado/ConsultarBoletim.jsp"
+			roles="42"/>
+
+		<action 
+			path="/GerarBoletim"
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.GerarBoletimAction"
+		    scope="request"
+		    unknown="false"
+			validate="false"
+			roles="35">
+			
+		    <forward
+		    	name="success"
+		        path="/pages/aprendizado/CadastrarBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+			
+		</action>
+
+		<action 
+			path="/AtualizarBoletim"
+			attribute="AtualizarBoletimForm"
+            name="AtualizarBoletimForm"
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.AtualizarBoletimAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			validate="false"
+			roles="42">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/aprendizado/ListarBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibir"
+		        path="/pages/aprendizado/ExibirBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibirDetalhe"
+		        path="/pages/aprendizado/ExibeDadosBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>    
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		    <forward
+		    	name="error"
+		        path="/pages/aprendizado/CadastrarBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		</action>	
+
+	    <!-- Ações de Atualização dos Grupos de Email -->  
+		<action 
+			path="/ConsultarGruposEmail"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/aprendizado/ConsultaGruposEmail.jsp"
+			roles="51"/>
+		
+		<action 
+			attribute="ListarGruposEmailForm"
+		    name="ListarGruposEmailForm"
+		    path="/ListarGruposEmail"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.AtualizarGruposEmailAction"
+		    parameter="action"
+		    unknown="false"
+		    validate="false"
+		    roles="51">
+		    
+		    <forward
+				name="success"
+			    path="/pages/aprendizado/ListaGruposEmail.jsp"
+			    redirect="false"
+			    contextRelative="true" />
+		</action>
+				
+        <action
+            attribute="ConfirmaGruposEmailForm"
+            name="ConfirmaGruposEmailForm"        
+        	path="/AtualizarGruposEmail"
+            scope="request"                                       
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.AtualizarGruposEmailAction"
+		    parameter="action"
+            unknown="false"
+            validate="false"
+            roles="51">
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>	
+		</action>		
+
+		<action
+			path="/ExibirGruposEmail"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.ExibirEntrarGruposEmailAction"
+		    unknown="false"
+		    validate="false" 
+		    roles="51">
+		    
+		    <forward
+		    	name="success"
+		        path="/pages/aprendizado/ExibeEntraGruposEmail.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+	    </action>	
+	    
+	    <action 
+			path="/AtualizarHistoricoEnvio"
+			attribute="AtualizarHistoricoEnvioForm"
+            name="AtualizarHistoricoEnvioForm"
+		    type="br.gov.serpro.ouvidoria.struts.action.aprendizado.AtualizarHistoricoEnvioAction"
+		    scope="request"
+		    parameter="action"
+		    unknown="false"
+			validate="false">
+
+		    <forward
+		    	name="listar"
+		        path="/pages/aprendizado/ListarHistoricoEnvio.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+		        
+		    <forward
+		    	name="exibirDetalhe"
+		        path="/pages/aprendizado/ExibeHistoricoEnvio.jsp"
+		        redirect="false"
+		        contextRelative="true"/>    
+		        
+			<forward
+		    	name="exibirDistribuir"
+		        path="/pages/aprendizado/DistribuirBoletim.jsp"
+		        redirect="false"
+		        contextRelative="true"/>		        
+
+		    <forward
+		    	name="success"
+		        path="/pages/SuccessMessage.jsp"
+		        redirect="false"
+		        contextRelative="true"/>
+
+		</action>
+	    		    
+	</action-mappings>
+
+	<controller processorClass="br.gov.serpro.ouvidoria.struts.CustomRequestProcessor"
+       		contentType="text/html"/> 
+
+	<message-resources parameter="resources.application"/>
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+
+</struts-config>

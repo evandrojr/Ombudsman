@@ -1,0 +1,140 @@
+body {  
+font-family: Arial, Helvetica, sans-serif;
+background: #FFFFFF;
+color: #000000;
+padding: 0;
+text-align: center
+} 
+
+#content {
+width:100%;
+margin:0px auto;
+text-align:left;
+padding:0;
+border:0;
+background-color:#FFF
+}
+
+
+p {font-size: 85% }
+p.noprint { font-size: 85% }/* importante devido ao print Utilizar esta class caso haja paragrafo que nao deva ser impresso */
+
+img { border: 0 }
+
+a:link {  color: #0000FF; text-decoration: none}
+a:visited {  color: #0000FF; text-decoration: none}
+a:hover {  color: #FF0000; text-decoration: underline}
+a:active {  color: #FF0000; text-decoration: none}
+
+h1 {  font-weight: bold; text-transform: uppercase; color: #FFFFFF; background-color: #FF6500; padding-top: 0.2em; padding-right: 0.2em; padding-bottom: 0em; padding-left: 0.2em; font-size: 75%}
+h2 {  font-size: 75%; font-weight: bold; text-transform: uppercase; color: #FF6500; padding-top: 0.2em; padding-right: 0.2em; padding-bottom: 0em; padding-left: 0.2em; border-color: black black #FF6500; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 3px; border-left-width: 0px}
+h3 {  font-size: 75%; font-weight: bold; text-transform: uppercase; color: #FF6500; padding-top: 0.2em; padding-right: 0.2em; padding-bottom: 0em; padding-left: 0.2em; border-color: black black #FF6500; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px}
+
+hr {  color: #FF6500; background-color: #FF6500; height: 3px }
+
+.voltar {  text-align: right; margin-top: -0.5em; font-weight: bold; color:#FF0000 }
+
+.bullet1 { font-size: 70%; list-style-image: url(images/bullet.gif); font-weight: bold }
+.bullet1 ul li{  font-size: 120%; list-style-image: url(images/bullet1a.gif);font-weight: normal}
+.bullet1 ul ul li{  font-size: 130%; list-style-image: url(images/bullet1b.gif)}
+.bullet1 ul ul ul li{  font-size: 120%; list-style-image: url(images/bullet1b.gif)}
+
+ul {  font-size: 80%; line-height: 1.5em}
+ul ul li{  font-size: 120%;  line-height: 1.5em}
+ul ul ul li{  font-size: 120%;  line-height: 1.5em}
+ul ul ul ul li{  font-size: 130%;  line-height: 1.5em}
+
+ol {  font-size: 80%; line-height: 1.5em}
+ol ol li{  font-size: 120%; line-height: 1.5em}
+ol ol ol li{  font-size: 120%; line-height: 1.5em}
+ol ol ol ol li{  font-size: 130%; line-height: 1.5em}
+
+table {
+background-color: #FF9900;
+margin-left: auto;
+margin-right: auto;
+}
+
+table td {
+padding: 2px;
+font-size: 70%;
+background-color: #FFFFFF
+}
+
+table th {
+font-size: 70%;
+font-weight: normal;
+text-align: left;
+background-color: #FFFFFF
+}
+
+table caption {
+color: #FF6500;
+font-weight: bold;
+text-align: center;
+font-size: 75%
+}
+
+.tdHeader1 {
+background-color: #FEB03C;
+color: #FFFFFF;
+font-weight: bold;
+text-align: center
+}
+
+.tdHeader2 {
+background-color: #FDCB7E;
+}
+
+.tdHeader3 {
+background-color: #FFDFAD;
+}
+
+.tdHeader3right {
+background-color: #FFDFAD;
+text-align:right
+}
+
+.tdHeader4 {
+background-color: #FFF3DE;
+}
+
+.contentBold {
+font-weight: bold;
+text-align: auto
+}
+
+.contentRight {
+text-align: right
+}
+
+.contentCenter {
+text-align: center
+}
+
+.contentRed {
+color: E70400
+}
+
+.paragrafo {font-size: 75%}
+
+/* campos de formulario */
+
+select { font-size: 100% }
+
+.text { border: 1px solid #FF9900; font-size: 100% }
+
+
+.button {border: 1px solid #FF9900; font-size: 100%; font-weight: bold; background-color: #FFF3DE; width: 85px; cursor: hand; }
+
+.botao {border: 1px solid #FF9900; font-size: 100%; font-weight: bold; background-color: #FFF3DE; width: 85px }
+
+.contentRightpad {
+text-align: right;
+padding-right:6px
+}
+
+.boldCor{
+font-weight:bold;
+color: #FF6500;
+}

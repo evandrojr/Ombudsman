@@ -1,0 +1,791 @@
+<?xml version="1.0"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="br.gov.serpro.ouvidoria.model.ConfiguracoesOrgao" table="configuracoes">
+    
+        <id name="id" type="long" column="cod_config">
+            <generator class="native" />
+        </id>
+
+        <property name="permiteMsgDigitalizadaAcionamento" type="boolean" column="ind_perm_msg_digit_acnmnt" />
+        <property name="permiteArquivoAnexoAcionamento" type="boolean" column="ind_perm_arq_anexo_acnmnt" />
+        <property name="tamanhoMaxArquivoAnexo" type="integer" column="num_tam_max_arq_anexo" />
+        <property name="tamanhoMaxArquivoCartaDigitalizada" type="integer" column="num_tam_max_arq_msg_digit" />
+        <property name="possuiCodigoAcesso" type="boolean" column="ind_possui_codigo_acesso" />
+        <property name="atendenteConsultaMsgNoAtendimento" type="boolean" column="ind_perm_atend_cons_msg" />
+        <property name="exigeCertificadoDigitalGeral" type="boolean" column="ind_cert_digit_geral" />
+        <property name="exigeCertificadoDigitalOrgao" type="boolean" column="ind_cert_digit_orgao" />
+        <property name="existeBloqueioProtocoloPeloCodigo" type="boolean" column="ind_bloq_codigo_acesso" />
+        <property name="existeBloqueioProtocoloPelaPergunta" type="boolean" column="ind_bloq_protoc" />
+        <property name="tempoBloqueioProtocoloPeloCodigo" type="integer" column="qtd_tempo_bloq_codigo_acesso" />
+        <property name="tempoBloqueioProtocoloPelaPergunta" type="integer" column="qtd_tempo_bloq_protoc" />
+        <property name="qtdeTentativasPossiveisCodigoAcesso" type="integer" column="qtd_tent_codigo_acesso" />
+        <property name="qtdeTentativasPossiveisPergunta" type="integer" column="qtd_tent_protoc" />
+        <property name="textoApresentacaoOuvidoria" type="string" column="dsc_texto_apres_ouvid" />
+        <property name="textoApresentacaoFormulario" type="string" column="dsc_texto_apres_form" />
+        <property name="textoApresentacaoResposta" type="string" column="dsc_texto_apres_resp" />
+        <property name="textoRespostaAcionamento" type="string" column="dsc_texto_resp_acnmnt" />
+        <property name="textoCanaisComunicacao" type="string" column="dsc_texto_canais_comuni" />
+        <property name="textoInformacaoOuvidoria" type="string" column="dsc_texto_info_ouvid" />
+        <property name="textoNotificacaoPendencia" type="string" column="dsc_texto_notificacao_pendencia" />
+        <property name="textoNotificacaoAtraso" type="string" column="dsc_texto_notificacao_atraso" />
+        <property name="textoNotificacaoAtrasoCritico" type="string" column="dsc_texto_notificacao_atraso_critico" />
+        <property name="esquemaCoresLayout" type="string" column="dsc_esqma_cores" />
+        <property name="nomeExibicaoOrgao" type="string" column="nom_exib_orgao" />
+        <property name="imagemLogo" type="string" column="nom_img_logo" />
+        <property name="imagemBanner" type="string" column="nom_img_banner" />
+        <property name="imagem3" type="string" column="nom_img_3" />
+        <property name="imagem4" type="string" column="nom_img_4" />
+        <property name="imagem5" type="string" column="nom_img_5" />
+        <property name="descricaoImagemLogo" type="string" column="dsc_img_logo" />
+        <property name="descricaoImagemBanner" type="string" column="dsc_img_banner" />
+        <property name="descricaoImagem3" type="string" column="dsc_img_3" />
+        <property name="descricaoImagem4" type="string" column="dsc_img_4" />
+        <property name="descricaoImagem5" type="string" column="dsc_img_5" />
+        <property name="linkImagemLogo" type="string" column="url_img_logo" />
+        <property name="linkImagemBanner" type="string" column="url_img_banner" />
+        <property name="linkImagem3" type="string" column="url_img_3" />
+        <property name="linkImagem4" type="string" column="url_img_4" />
+        <property name="linkImagem5" type="string" column="url_img_5" />
+        <property name="urlBaseFuncionarios" type="string" column="dsc_url_base_func" />
+        <property name="textoConsultaRespostaNoPrazo" type="string" column="dsc_texto_cons_resp_no_prazo" />
+        <property name="textoConsultaRespostaSemPrazo" type="string" column="dsc_texto_cons_resp_sem_prazo" />
+        <property name="textoConsultaRespostaEmAtraso" type="string" column="dsc_texto_cons_resp_em_atraso" />
+        <property name="textoAvaliacaoResposta" type="string" column="dsc_texto_aval_resp" />
+        <property name="remetenteEmail" type="string" column="nom_remet_email" />
+        <property name="textoLegislacaoOuvidoria" type="string" column="dsc_texto_legisl_ouvid" />
+        <property name="nomeDiretorioOrgao" type="string" column="dsc_dir_arq_anexos_orgao" />
+        <property name="corCabecalhoLogo" type="string" column="dsc_cor_cab_logo" />
+        <property name="corCabecalhoBanner" type="string" column="dsc_cor_cab_banner" />
+        <property name="urlSuporteUsuario" type="string" column="dsc_url_suport_usu" />
+        <property name="notificacaoEmail" type="string" column="IND_NOTIFICACAO_EMAIL" />
+        <property name="horaEnvioNotificacao" type="string" column="HOR_ENVIO_NOTIFICACAO" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Instituicao" table="instituicao">
+
+        <id name="id" type="long" column="cod_instit">
+            <generator class="native" />
+        </id>
+
+        <discriminator column="ind_tipo_instit" type="string" />
+
+        <property name="descricao" type="string" column="dsc_instit" />
+        <property name="dataInicioOperacao" type="timestamp" column="dat_ini_oper" />
+        <property name="dataFimOperacao" type="timestamp" column="dat_fim_oper" />
+        <property name="dataInicioCadastramento" type="timestamp" column="dat_ini_cadast" />
+        <property name="dataFimCadastramento" type="timestamp" column="dat_fim_cadast" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+
+        <set name="listaAssunto" table="assunto">
+            <key column="cod_instit" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.Assunto" />
+        </set>
+
+        <subclass name="br.gov.serpro.ouvidoria.model.Orgao" discriminator-value="0">
+
+            <property name="dataInicioAcionamento" type="timestamp" column="dat_ini_acnmnt" />
+            <property name="dataFimAcionamento" type="timestamp" column="dat_fim_acnmnt" />
+            <property name="dataInicioConsultaResposta" type="timestamp" column="dat_ini_cons_resp" />
+            <property name="dataFimConsultaResposta" type="timestamp" column="dat_fim_cons_resp" />
+            <property name="gestorResponsavel" type="string" column="nom_respon" />
+            <property name="telefoneContatoGestor" type="string" column="num_tel_respon" />
+            <property name="codigoPaisTelefoneResponsavel" type="string" column="dsc_ddi_respon" />
+            <property name="codigoCidadeTelefoneResponsavel" type="string" column="dsc_ddd_respon" />
+            <property name="statusOrgao" type="string" column="ind_situa_orgao" />
+
+            <many-to-one name="configuracoes" column="cod_config" class="br.gov.serpro.ouvidoria.model.ConfiguracoesOrgao" cascade="all" />
+
+            <set name="listaGruposEmail" table="gruposemail">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.GruposEmail" />
+            </set>
+
+            <set name="listaMeioEnvioRespostaOrgao" table="meioenviorespostaorgao" where="( DAT_VIGENC IS NULL OR DAT_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.MeioEnvioRespostaOrgao" />
+            </set>
+
+            <set name="listaSubOrgao" table="instituicao" where="( DAT_FIM_VIGENC IS NULL OR DAT_FIM_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit_pai" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.SubOrgao" />
+            </set>
+
+            <set name="listaTodosSubOrgaos" table="instituicao" >
+                <key column="cod_instit_pai" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.SubOrgao" />
+            </set>
+
+            <set name="listaTipoAvaliacaoResposta" table="tipoavaliacaoresposta" where="( DAT_VIGENC IS NULL OR DAT_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.TipoAvaliacaoResposta" />
+            </set>
+
+            <set name="listaTipoAcionadorOrgao" table="tipoacionadororgao" where="( DAT_VIGENC IS NULL OR DAT_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.TipoAcionadorOrgao" />
+            </set>
+
+            <set name="listaTipoMensagem" table="tipomensagem" where="( DAT_VIGENC IS NULL OR DAT_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.TipoMensagem" />
+            </set>
+
+        </subclass>
+
+        <subclass name="br.gov.serpro.ouvidoria.model.SubOrgao" discriminator-value="1">
+
+            <property name="dataInicioVigencia" type="timestamp" column="dat_ini_vigenc" />
+            <property name="dataFimVigencia" type="timestamp" column="dat_fim_vigenc" />
+
+            <many-to-one name="orgao" column="cod_instit_pai" class="br.gov.serpro.ouvidoria.model.Orgao" />
+
+            <set name="listaLocalidadeOcorrencia" table="localidadeocorrencia" where="( DAT_VIGENC IS NULL OR DAT_VIGENC >= CURRENT_TIMESTAMP )">
+                <key column="cod_instit" />
+                <one-to-many class="br.gov.serpro.ouvidoria.model.LocalidadeOcorrencia" />
+            </set>
+
+
+        </subclass>
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Assunto" table="assunto">
+
+        <id name="id" type="long" column="cod_assnto">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_assnto" />
+        <property name="descricaoDetalhada" type="string" column="dsc_detalh_assnto" />
+        <property name="prazoInterno" type="integer" column="qtd_prazo_int" />
+        <property name="prazoExterno" type="integer" column="qtd_prazo_ext" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+
+        <many-to-one name="instituicao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Instituicao" />
+
+        <set name="listaFuncionario" table="funcionarioassunto">
+            <key column="cod_assnto" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Funcionario" column="cod_func" />
+        </set>
+
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.TipoMensagem" table="tipomensagem">
+
+        <id name="id" type="long" column="cod_tipo_msg">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_tipo_msg" />
+        <property name="descricaoDetalhada" type="string" column="dsc_detalh_tipo_msg" />
+        <property name="prazoInterno" type="integer" column="qtd_prazo_int" />
+        <property name="prazoExterno" type="integer" column="qtd_prazo_ext" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" />
+
+        <set name="listaFuncionario" table="funcionariotipomensagem">
+            <key column="cod_tipo_msg" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Funcionario" column="cod_func" />
+        </set>
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Mensagem" table="mensagem">
+
+        <id name="id" type="long" column="cod_msg">
+            <generator class="native" />
+        </id>
+
+        <property name="texto" type="string" column="dsc_texto" access="field" />
+        <property name="arquivoAnexo" type="string" column="nom_arq_anexo" access="field" />
+        <property name="mensagemDigitalizada" type="string" column="nom_arq_msg_digit" access="field" />
+
+        <many-to-one name="assunto" column="cod_assnto" class="br.gov.serpro.ouvidoria.model.Assunto" cascade="none" />
+        <many-to-one name="tipoMensagem" column="cod_tipo_msg" class="br.gov.serpro.ouvidoria.model.TipoMensagem" cascade="none" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Escolaridade" table="escolaridade" mutable="false">
+
+        <id name="id" type="long" column="cod_escola">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_escola" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.FaixaEtaria" table="faixaetaria" mutable="false">
+
+        <id name="id" type="long" column="cod_faixa_etaria">
+            <generator class="native" />
+        </id>
+
+        <property name="intervalo" type="string" column="dsc_interv" />
+        <property name="idadeInicial" type="integer" column="num_idade_ini" />
+        <property name="idadeFinal" type="integer" column="num_idade_fim" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.MeioEnvioResposta" table="meioenvioresposta" mutable="false">
+
+        <id name="id" type="long" column="cod_meio_env_resp">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_meio_env_resp" />
+    </class>
+
+
+    <class name="br.gov.serpro.ouvidoria.model.MeioEnvioRespostaOrgao" table="meioenviorespostaorgao">
+
+        <id name="id" type="long" column="cod_meio_envio_resp_orgao">
+            <generator class="native" />
+        </id>
+
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+
+        <many-to-one name="meioEnvioResposta" column="cod_meio_env_resp" class="br.gov.serpro.ouvidoria.model.MeioEnvioResposta" cascade="none" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" cascade="none" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.TipoAcionador" table="tipoacionador" mutable="false">
+
+        <id name="id" type="long" column="cod_tipo_acndor">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_tipo_acndor" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.TipoAcionadorOrgao" table="tipoacionadororgao">
+
+        <id name="id" type="long" column="cod_tipo_acndor_orgao">
+            <generator class="native" />
+        </id>
+
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+
+        <many-to-one name="tipoAcionador" column="cod_tipo_acndor" class="br.gov.serpro.ouvidoria.model.TipoAcionador" cascade="none" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" cascade="none" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.UF" table="uf" mutable="false">
+
+        <id name="id" type="long" column="cod_uf">
+            <generator class="native" />
+        </id>
+
+        <property name="sigla" type="string" column="dsc_sigla_uf" />
+        <property name="nome" type="string" column="dsc_uf" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.InformacoesConsultaAcionamento" table="informacoesconsultaacionamento">
+
+        <id name="id" type="long" column="cod_cons_acnmnt">
+            <generator class="native" />
+        </id>
+
+        <property name="codigoAcesso" type="string" column="cod_acesso" access="field" />
+        <property name="pergunta" type="string" column="dsc_perg" />
+        <property name="resposta" type="string" column="dsc_resp" />
+
+        <property name="numeroTentativasCodigo" type="integer" column="num_tent_cod" />
+        <property name="numeroTentativasPergunta" type="integer" column="num_tent_perg" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Pais" table="pais" mutable="false">
+
+        <id name="id" type="long" column="cod_pais">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_pais" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.InformacoesRecebimentoRespostaCarta" table="informacoesrecebimentoresposta">
+
+        <id name="id" type="long" column="cod_meio_receb_resp">
+            <generator class="native" />
+        </id>
+
+        <property name="logradouro" type="string" column="dsc_lograd" access="field" />
+
+        <property name="numero" type="string" column="num_lograd" access="field" />
+
+        <property name="complemento" type="string" column="dsc_compl_lograd" access="field" />
+        <property name="bairro" type="string" column="dsc_bairro" access="field" />
+        <property name="cidade" type="string" column="dsc_cidade" access="field" />
+        <property name="cep" type="string" column="num_cep" access="field" />
+
+        <many-to-one name="uf" class="br.gov.serpro.ouvidoria.model.UF" column="cod_uf" cascade="none" />
+
+        <many-to-one name="pais" class="br.gov.serpro.ouvidoria.model.Pais" column="cod_pais" cascade="none" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Acionador" table="acionador" discriminator-value="A">
+
+        <id name="id" type="long" column="cod_acndor">
+            <generator class="native" />
+        </id>
+
+        <discriminator column="tip_cpf_cnpj" type="string" />
+
+        <property name="sexo" type="string" column="tip_sexo" access="field" />
+        <property name="email" type="string" column="dsc_email" access="field" />
+        <property name="codigoPaisTelefone" type="string" column="dsc_ddi_tel" access="field" />
+        <property name="codigoCidadeTelefone" type="string" column="dsc_ddd_tel" access="field" />
+        <property name="telefone" type="string" column="dsc_tel" access="field" />
+        <property name="codigoPaisFax" type="string" column="dsc_ddi_fax" access="field" />
+        <property name="codigoCidadeFax" type="string" column="dsc_ddd_fax" access="field" />
+        <property name="fax" type="string" column="dsc_fax" access="field" />
+
+        <many-to-one name="escolaridade" column="cod_escola" class="br.gov.serpro.ouvidoria.model.Escolaridade" cascade="none" />
+        <many-to-one name="faixaEtaria" column="cod_faixa_etaria" class="br.gov.serpro.ouvidoria.model.FaixaEtaria" cascade="none" />
+        <many-to-one name="meioEnvioRespostaOrgao" column="cod_meio_envio_resp_orgao" class="br.gov.serpro.ouvidoria.model.MeioEnvioRespostaOrgao" cascade="none" />
+        <many-to-one name="tipoAcionador" column="cod_tipo_acndor" class="br.gov.serpro.ouvidoria.model.TipoAcionador" cascade="none" />
+        <many-to-one name="uf" column="cod_uf" class="br.gov.serpro.ouvidoria.model.UF" cascade="none" />
+        <many-to-one name="pais" column="cod_pais" class="br.gov.serpro.ouvidoria.model.Pais" cascade="none" />
+        <many-to-one name="informacoesRecebimentoRespostaCarta" column="cod_meio_receb_resp" class="br.gov.serpro.ouvidoria.model.InformacoesRecebimentoRespostaCarta" cascade="all" />
+        <many-to-one name="informacoesConsultaAcionamento" column="cod_cons_acnmnt" class="br.gov.serpro.ouvidoria.model.InformacoesConsultaAcionamento" cascade="all" />
+
+        <subclass name="br.gov.serpro.ouvidoria.model.AcionadorPessoaFisica" discriminator-value="F" proxy="br.gov.serpro.ouvidoria.model.AcionadorPessoaFisica">
+
+            <property name="nome" type="string" column="nom_acndor" access="field" />
+            <property name="cpf" type="string" column="num_cpf_acndor" access="field" />
+
+            <subclass name="br.gov.serpro.ouvidoria.model.AcionadorFuncionario" discriminator-value="C">
+                <property name="matricula" type="string" column="num_matricula" access="field" />
+                <property name="setor" type="string" column="dsc_setor" access="field" />
+            </subclass>
+
+        </subclass>
+
+        <subclass name="br.gov.serpro.ouvidoria.model.AcionadorPessoaJuridica" discriminator-value="J">
+            <property name="cnpj" type="string" column="num_cnpj" access="field" />
+            <property name="razaoSocial" type="string" column="dsc_razao_soc" access="field" />
+            <property name="nomeContato" type="string" column="nom_contat" access="field" />
+            <property name="cpfAcionador" type="string" column="num_cpf_contat" access="field" />
+        </subclass>
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.TipoAvaliacaoResposta" table="tipoavaliacaoresposta">
+
+        <id name="id" type="long" column="cod_tipo_aval_resp">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_tipo_aval_resp" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+        <property name="tipoAvaliacao" type="string" column="ind_tipo_aval_resp" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.RespostaAcionamento" table="respostaacionamento">
+
+        <id name="id" type="long" column="cod_resp">
+            <generator class="native" />
+        </id>
+
+        <property name="titulo" type="string" column="dsc_titulo_resp_acnmnt" access="field" />
+        <property name="texto" type="string" column="dsc_resp_acnmnt" access="field" />
+        <property name="data" type="timestamp" column="dat_resp_acnmnt" />
+        <property name="dataEnvio" type="timestamp" column="dat_envio_resp" />
+		
+        <many-to-one name="tipoAvaliacaoResposta" column="cod_tipo_aval_resp" class="br.gov.serpro.ouvidoria.model.TipoAvaliacaoResposta" />
+        <!-- Campo Incluído para permitir saber-se quantas vezes uma solucao foi utilizada -->
+        <many-to-one name="solucao" column="cod_soluc" class="br.gov.serpro.ouvidoria.model.Solucao" cascade="none"/> 
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.MeioRecebimentoAcionamento" table="meiorecebimento">
+
+        <id name="id" type="long" column="cod_meio_receb">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_meio_receb" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Funcionalidade" table="funcionalidade" mutable="false">
+
+        <id name="id" type="long" column="cod_funcio">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_funcio" />
+        <property name="itemMenu" type="boolean" column="ind_item_menu" />
+        <property name="ordemItemMenu" type="integer" column="num_ordem_item_menu" />
+        <property name="path" type="string" column="dsc_path" />
+        <property name="imageWidth" type="string" column="tam_imagem" />
+        <property name="pathImageHi" type="string" column="dsc_path_imagem_hi" />
+        <property name="pathImageLo" type="string" column="dsc_path_imagem_lo" />
+        <property name="geraHistorico" type="boolean" column="ind_histor" />
+        <property name="necessarioLogin" type="boolean" column="ind_autent" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+
+        <many-to-one name="itemPai" column="cod_funcio_pai" class="br.gov.serpro.ouvidoria.model.Funcionalidade" cascade="none" />
+
+        <set name="listaSubItem" table="funcionalidade">
+            <key column="cod_funcio_pai" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.Funcionalidade" />
+        </set>
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Perfil" table="perfil">
+
+        <id name="id" type="long" column="cod_perfil">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_perfil" />
+
+        <set name="listaFuncionalidade" table="acessodefault">
+            <key column="cod_perfil" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Funcionalidade" column="cod_funcio" />
+        </set>
+
+        <many-to-one name="funcionalidade" column="cod_funcio" class="br.gov.serpro.ouvidoria.model.Funcionalidade" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Funcionario" table="funcionario">
+
+        <id name="id" type="long" column="cod_func">
+            <generator class="native" />
+        </id>
+
+        <property name="nome" type="string" column="nom_func" />
+        <property name="login" type="string" column="dsc_login" />
+        <property name="senha" type="string" column="dsc_senha" access="field" />
+        <property name="situacao" type="string" column="ind_situa" />
+        <property name="consultor" type="string" column="consultor" />
+        <property name="motivoNivelAtuacao" type="string" column="DSC_MOTIVO" />
+        <property name="qtdTentativasLogin" type="integer" column="qtd_tent_login" />
+        <property name="dataBloqueioLogin" type="timestamp" column="dat_bloqueio_login" />
+		<property name="email" type="string" column="dsc_email" access="field" />
+
+        <many-to-one name="instituicao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Instituicao" cascade="none" />
+        <many-to-one name="perfil" column="cod_perfil" class="br.gov.serpro.ouvidoria.model.Perfil" cascade="save-update" />
+
+        <set name="listaFuncionalidade" table="acesso">
+            <key column="cod_func" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Funcionalidade" column="cod_funcio" />
+        </set>
+
+        <set name="listaInstituicao" table="funcionarioinstituicao">
+            <key column="cod_func" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Instituicao" column="cod_instit" />
+        </set>
+
+        <set name="listaLocalidadeOcorrencia" table="funcionariolocalocorrencia">
+            <key column="cod_func" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.LocalidadeOcorrencia" column="cod_local_ocorr" />
+        </set>
+
+        <set name="listaAssunto" table="funcionarioassunto">
+            <key column="cod_func" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.Assunto" column="cod_assnto" />
+        </set>
+
+        <set name="listaTipoMensagem" table="funcionariotipomensagem">
+            <key column="cod_func" />
+            <many-to-many class="br.gov.serpro.ouvidoria.model.TipoMensagem" column="cod_tipo_msg" />
+        </set>
+
+        <set name="listaAcionamento">
+            <key column="cod_func" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.Acionamento" />
+        </set>
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.LocalidadeOcorrencia" table="localidadeocorrencia">
+
+        <id name="id" type="long" column="cod_local_ocorr">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_local_ocorr" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+
+        <many-to-one name="subOrgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.SubOrgao" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.EstadoAcionamento" table="estadoacionamento">
+
+        <id name="id" type="long" column="cod_estado_acnmnt">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_estado_acnmnt" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Acionamento" table="acionamento">
+        
+        <id name="id" type="long" column="cod_acnmnt">
+            <generator class="native" />
+        </id>
+
+        <property name="numeroProtocolo" type="integer" column="num_protoc" />
+        <property name="despacho" type="string" column="dsc_dspcho" />
+        <property name="origemAcionamento" type="string" column="dsc_origem_acnmnt" />
+        <property name="dataAcionamento" type="timestamp" column="dat_acnmnt" />
+        <property name="dataInicioAndamento" type="timestamp" column="dat_ini_andmnt" />
+        <property name="dataPrevistaResolucaoInterna" type="timestamp" column="dat_prev_resol_int" />
+        <property name="dataPrevistaResolucaoExterna" type="timestamp" column="dat_prev_resol_ext" />
+        <property name="dataLimiteDesbloqueio" type="timestamp" column="dat_limite_dbloq" />
+        <property name="atendidoNoPrazo" type="boolean" column="ind_atend_prazo" />
+
+        <many-to-one name="acionador" column="cod_acndor" class="br.gov.serpro.ouvidoria.model.Acionador" cascade="all"/>
+        <many-to-one name="mensagem" column="cod_msg" class="br.gov.serpro.ouvidoria.model.Mensagem" cascade="all" />
+        <many-to-one name="localidadeOcorrencia" column="cod_local_ocorr" class="br.gov.serpro.ouvidoria.model.LocalidadeOcorrencia" />
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+        <many-to-one name="meioRecebimentoAcionamento" column="cod_meio_receb" class="br.gov.serpro.ouvidoria.model.MeioRecebimentoAcionamento" />
+        <many-to-one name="estadoAcionamento" column="cod_estado_acnmnt" class="br.gov.serpro.ouvidoria.model.EstadoAcionamento" />
+        <many-to-one name="respostaAcionamento" column="cod_resp" class="br.gov.serpro.ouvidoria.model.RespostaAcionamento" cascade="all" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.EstadoScript" table="estadoscript">
+
+        <id name="id" type="long" column="cod_estado_script">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_estado_script" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Script" table="script">
+
+        <id name="id" type="long" column="cod_script">
+            <generator class="native" />
+        </id>
+
+        <property name="titulo" type="string" column="dsc_titulo_script" />
+        <property name="descricao" type="string" column="dsc_script" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="observacao" type="string" column="dsc_observ" />
+
+        <many-to-one name="estado" column="cod_estado_script" class="br.gov.serpro.ouvidoria.model.EstadoScript" />
+
+        <many-to-one name="assunto" column="cod_assnto" class="br.gov.serpro.ouvidoria.model.Assunto" />
+
+        <set name="listaAtendimento">
+            <key column="cod_script" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.Atendimento" />
+        </set>
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Atendimento" table="atendimento">
+
+        <id name="id" type="long" column="cod_atend">
+            <generator class="native" />
+        </id>
+
+        <property name="data" type="timestamp" column="dat_atend" />
+
+        <many-to-one name="script" column="cod_script" class="br.gov.serpro.ouvidoria.model.Script" />
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+
+    </class>
+
+	<class name="br.gov.serpro.ouvidoria.model.EstadoSolucao" table="estadosolucao">
+
+        <id name="id" type="long" column="cod_estado_solucao">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_estado_solucao" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Solucao" table="solucao">
+
+        <id name="id" type="long" column="cod_soluc">
+            <generator class="native" />
+        </id>
+
+        <property name="titulo" type="string" column="dsc_titulo" />
+        <property name="texto" type="string" column="dsc_soluc" />
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+        <property name="dataVigencia" type="timestamp" column="dat_vigenc" />
+		<property name="observacao" type="string" column="dsc_observacao" />
+
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+        <many-to-one name="assunto" column="cod_assnto" class="br.gov.serpro.ouvidoria.model.Assunto" />
+		<many-to-one name="estado" column="cod_estado_solucao" class="br.gov.serpro.ouvidoria.model.EstadoSolucao" />
+		
+		<set name="listaRespostaAcionamento">
+            <key column="cod_soluc" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.RespostaAcionamento" />
+        </set>
+		
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Historico" table="historico">
+
+        <id name="id" type="long" column="cod_histor">
+            <generator class="native" />
+        </id>
+
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+
+        <many-to-one name="acionamento" column="cod_acnmnt" class="br.gov.serpro.ouvidoria.model.Acionamento" />
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+        <many-to-one name="funcionalidade" column="cod_funcio" class="br.gov.serpro.ouvidoria.model.Funcionalidade" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.GruposEmail" table="gruposemail">
+
+        <id name="id" type="long" column="cod_grupo">
+            <generator class="native" />
+        </id>
+
+        <property name="descricao" type="string" column="dsc_grupo" />
+        <property name="listaEmail" type="string" column="dsc_lista_email" />
+        <property name="dataCriacao" type="timestamp" column="dat_cadast" />
+        <property name="dataUltimaAlteracao" type="timestamp" column="dat_update" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Boletim" table="boletim">
+
+        <id name="id" type="long" column="cod_bolet">
+            <generator class="native" />
+        </id>
+
+        <property name="nome" type="string" column="nom_bolet" />
+        <property name="numero" type="integer" column="num_bolet" />
+        <property name="areaGeradora" type="string" column="dsc_area_gerd" />
+        <property name="telefone" type="string" column="num_tel" />
+        <property name="conteudo" type="string" column="dsc_conteu" />
+        <property name="diretorioLocalizacao" type="string" column="dsc_dir_local" />
+
+        <property name="possuiCabecalho" type="boolean" column="ind_cabec" />
+        <property name="possuiGrafico" type="boolean" column="ind_grafic" />
+        <property name="possuiTabelaDados" type="boolean" column="ind_tabela" />
+        <property name="publicar" type="boolean" column="ind_public" />
+
+        <property name="dataCadastramento" type="timestamp" column="dat_cadast" />
+
+        <many-to-one name="orgao" column="cod_instit" class="br.gov.serpro.ouvidoria.model.Orgao" />
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.ParametrosGerais" table="parametrosgerais">
+
+        <id name="id" type="long" column="cod_param">
+            <generator class="native" />
+        </id>
+
+        <property name="servidorSMTP" type="string" column="nom_serv_smtp" />
+        <property name="diretorioContextoAplicacao" type="string" column="nom_dir_arq_anexos" />
+        <property name="tempoAcessoBaseFuncionarios" type="integer" column="qtd_tempo_acesso_base_func" />
+        <property name="extensoesArquivoAnexoNaoPermitidos" type="string" column="dsc_extens_arq_anexo_nao_perm" />
+        <property name="extensoesMensagemDigitalizadaPermitidas" type="string" column="dsc_extens_msg_dig_perm" />
+        <property name="limiteColunaIndicadores" type="integer" column="num_limite_cols_indica" />
+        <property name="limiteFalhasLogin" type="integer" column="qtd_max_falha_login" />
+        <property name="tempoBloqueioLogin" type="integer" column="qtd_tempo_bloq_login" />
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Protocolo" table="protocolo">
+
+        <id name="id" type="long" column="cod_protoc">
+            <generator class="native" />
+        </id>
+
+        <property name="numeroProtocolo" type="integer" column="num_protoc" />
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.HistoricoEnvio" table="historicoenvio">
+
+        <id name="id" type="long" column="cod_histen">
+            <generator class="native" />
+        </id>
+
+        <property name="dataEnvio" type="timestamp" column="dat_envio" />
+        <property name="listaEmails" type="string" column="dsc_lista_email" />
+
+        <many-to-one name="funcionario" column="cod_func" class="br.gov.serpro.ouvidoria.model.Funcionario" />
+        <many-to-one name="boletim" column="cod_bolet" class="br.gov.serpro.ouvidoria.model.Boletim" />
+
+
+    </class>
+
+    <class name="br.gov.serpro.ouvidoria.model.Ajuda" table="ajuda">
+
+        <id name="id" type="long" column="cod_ajuda">
+            <generator class="native" />
+        </id>
+
+        <many-to-one name="funcionalidade" column="cod_funcio" class="br.gov.serpro.ouvidoria.model.Funcionalidade" />
+        <many-to-one name="ajudaPai" column="COD_AJUDA_PAI" class="br.gov.serpro.ouvidoria.model.Ajuda" cascade="none" />
+
+        <property name="descricao" type="string" column="DSC_TITULO" />
+        <property name="tipo" type="string" column="IND_TIPO" />
+        <property name="htmlAjuda" type="string" column="DSC_HTML_AJUDA" />
+        <property name="ordem" type="integer" column="NUM_ORDEM" />
+        <property name="grupo" type="integer" column="COD_GRUPO" />
+
+        <set name="listaFilhos" table="ajuda" order-by="NUM_ORDEM ASC">
+            <key column="cod_ajuda_pai" />
+            <one-to-many class="br.gov.serpro.ouvidoria.model.Ajuda" />
+        </set>
+
+    </class>
+
+</hibernate-mapping>

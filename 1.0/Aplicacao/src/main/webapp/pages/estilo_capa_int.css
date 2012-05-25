@@ -1,0 +1,74 @@
+/* Valid CSS 2.0 http://jigsaw.w3.org/css-validator */
+
+a:link {  color: #0000FF; text-decoration: none}
+a:visited {  color: #0000FF; text-decoration: none}
+a:hover {  color: #FF0000; text-decoration: underline}
+
+body {  
+margin: 0;
+padding: 0;
+background-color: #FFFFFF;
+background-image: url(images/SistCpBack.gif);
+font-family: Arial, Helvetica, sans-serif; 
+font-size: 70%; 
+color: #000000
+}
+
+img { border:0}
+
+div.ug { position:absolute; left:0; top:0; width:100%; height:60px; background-image: url(images/SistFr01Back.gif); border: 0px; color: #FFFFFF }
+div.ug img { vertical-align:middle}
+
+div.sol { position:absolute; left:0; top:50px; width:160px }
+
+div.produto { position:absolute; left:0px; top:312px; width:160px }
+
+div.mensagem { position:absolute; left:170px; top: 35px; width:440px }
+div.mensagem h1 { font-size: 130%; font-weight: bold; color: #0030CE; text-align: center}
+div.mensagem p { color: #000000; border: #999999 solid; border-width: 2px 0px}
+
+div.login { position:absolute; left: 240px; top: 20em; width: 300px }
+div.login table { font-size: 100%; background-color: #CCCCCC; width: 100%; border: 1px solid #999999; text-align: right}
+div.login table caption { font-size: 100% }
+div.login table td.left { width:38% }
+div.login p { text-align:center }
+div.login p.mes { font-weight: bold; color: #FF0000 }
+div.login input { font-size: 100%; border: 1px solid #999999; color: #000000; width: 85px; float: left; margin-right: 0.2em}
+
+/* estilo do main.jsp */
+div.logotipo { position:absolute; left:170px; top: 0px; width:440px; text-align:center }
+
+div.sol1 { position:absolute; left:0; top:2px; width:160px }
+
+div.produto1 { position:absolute; left:0px; top:100px; width:160px }
+
+div.fim { position:absolute; left:0px; bottom:0px; width:100%; background-color: #0051A5;}
+
+/* estilo do menu.htm */
+div.menu{ position:absolute; z-index:100; left:0px; top:75px; width:100%; height:25px; background-color: #666666; }
+
+div.busca { position:absolute; left:522px; top:25px; z-index:1 }
+div.busca input { font-size: 100%; border: 1px solid #999999; color: #000000; width: 100px; margin-right: 0.2em}
+div.busca a {font-weight:bold}
+div.busca a:link {  color: #FFFFFF; text-decoration: none}
+div.busca a:visited {  color: #FFFFFF; text-decoration: none}
+div.busca a:hover {  color: #FFFF66; text-decoration: underline}
+
+div.sair { position:absolute; top:66px; right: 10px; font-size: 100%; color: #FFFFFF; font-weight:bold;}
+div.sair a {font-weight:bold; color: #FFFFFF; }
+div.sair a:link {  color: #FFFFFF; text-decoration: none}
+div.sair a:visited {  color: #FFFFFF; text-decoration: none}
+div.sair a:hover {  color: #505050; text-decoration: none}
+
+div.botaoSair {position:absolute; top:60px; right: 10px; font-size: 100%; color: #FFFFFF; font-weight:bold;}
+
+#left ul {
+margin: 0; /* IE Opera*/
+padding: 0; /*Mozilla NN7*/
+font-size: 75%;
+list-style-type: none;
+}
+#left li {
+margin: 0;
+padding: 0;
+}

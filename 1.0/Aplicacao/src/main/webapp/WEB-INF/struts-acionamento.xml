@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+       
+    	<form-bean dynamic="true" name="CadastrarAcionamentoForm" type="br.gov.serpro.ouvidoria.struts.form.CadastrarAcionamentoForm">
+    	</form-bean>
+
+        <form-bean dynamic="true" name="ListarScriptForm" type="org.apache.struts.action.DynaActionForm">
+        	<form-property name="txtBusca" type="java.lang.String" />
+            <form-property name="txtAssunto" type="java.lang.String" />
+            <form-property name="chkBuscarNovamente" type="java.lang.String"/>
+            <form-property name="idScript" type="java.lang.Integer" />
+        </form-bean>
+
+	</form-beans>
+
+	<global-exceptions>
+	</global-exceptions>
+	
+	<global-forwards>
+
+		<forward 
+        	name="vazio" 
+        	path="/Vazio.do"/>
+
+	</global-forwards>
+    
+	<action-mappings>
+
+		<action
+	    	attribute="CadastrarAcionamentoForm"
+			name="CadastrarAcionamentoForm"
+			input="/EnviarMensagemWeb.do"
+			path="/CadastrarAcionamento"
+			scope="request"                                       
+			type="br.gov.serpro.ouvidoria.struts.action.acionamento.CadastrarAcionamentoAction"
+			unknown="false"
+			validate="true"
+			roles="32">
+
+			<forward
+				name="success"
+				path="/pages/acionamento/AcionamentoCadastrado.jsp"
+				redirect="false"
+				contextRelative="true" />
+				
+		</action>
+	  
+		<action 
+			attribute="CadastrarAcionamentoForm"
+			name="CadastrarAcionamentoForm"
+			path="/EnviarMensagemWeb"
+			scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.acionamento.EnviarMensagemWebAction"
+			unknown="false"
+			validate="false"
+			roles="32">
+
+			<forward
+				name="success"
+				path="/pages/acionamento/EnviarMensagemWeb.jsp"
+				redirect="false"
+				contextRelative="true" />
+				
+		</action>
+  
+		<action 
+			path="/ConsultarScript"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.acionamento.ConsultarScriptAction"
+		    unknown="false"
+		    validate="false"
+		  	roles="7">
+		    <forward
+		    	name="success"
+		        path="/pages/acionamento/ConsultarScript.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+		</action>
+		
+		<action 
+			attribute="ListarScriptForm"
+		    name="ListarScriptForm"
+		    path="/ListarScript"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.acionamento.ListarScriptAction"
+		    unknown="false"
+		    validate="false"
+			roles="7">
+		    <forward
+				name="success"
+			    path="/pages/acionamento/ListarScript.jsp"
+			    redirect="false"
+			    contextRelative="true" />
+		</action>
+		  
+		<action
+			path="/ExibirScript"
+		    scope="request"
+		    type="br.gov.serpro.ouvidoria.struts.action.acionamento.ExibirScriptAction"
+		    unknown="false"
+		    validate="false"
+		  	roles="7">
+		    <forward
+		    	name="success"
+		        path="/pages/acionamento/ExibirScript.jsp"
+		        redirect="false"
+		        contextRelative="true" />
+		</action>
+		
+		<action 
+			attribute="ListarScriptForm"
+			name="ListarScriptForm"
+			path="/CadastrarAtendimento"
+			scope="request"
+			type="br.gov.serpro.ouvidoria.struts.action.acionamento.CadastrarAtendimentoAction"
+			unknown="false"
+			validate="false"
+			roles="7">
+			<forward
+				name="success"
+			    path="/ConsultarScript.do"
+			    redirect="false"
+			    contextRelative="false" />
+		</action>
+
+		<action 
+			path="/Vazio"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/acionamento/_blank.htm"/>
+
+	</action-mappings>
+    
+	<controller processorClass="br.gov.serpro.ouvidoria.struts.CustomRequestProcessor"
+       		contentType="text/html"/> 
+
+	<message-resources parameter="resources.application"/>
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+	</plug-in>
+
+</struts-config>

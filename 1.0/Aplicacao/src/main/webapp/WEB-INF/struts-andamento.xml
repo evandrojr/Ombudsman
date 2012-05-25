@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+
+		<!-- Consulta ao Banco de Soluções -->
+		<form-bean dynamic="true" name="ConsultaSolucoesForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="acaoChamadora" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="ListaSolucoesForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="txtBusca" type="java.lang.String" />
+			<form-property name="txtAssunto" type="java.lang.String" />
+			<form-property name="chkAtivo" type="java.lang.String" />
+			<form-property name="chkInativo" type="java.lang.String" />
+			<form-property name="acaoChamadora" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Consultar Resposta -->
+		<form-bean dynamic="true" name="ExibirRespostaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="numeroProtocolo" type="java.lang.Integer" />
+			<form-property name="codigoAcesso" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Avaliar Solução -->
+		<form-bean dynamic="true" name="AvaliarRespostaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="numeroProtocolo" type="java.lang.Integer" />
+			<form-property name="tipoAvaliacaoResposta" type="java.lang.Integer" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="ListaMsgForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="chkpend" type="java.lang.String" />
+			<form-property name="chkand" type="java.lang.String" />
+			<form-property name="chkatraso" type="java.lang.String" />
+			<form-property name="chkcritico" type="java.lang.String" />
+			<form-property name="txtDatIni" type="java.lang.String" />
+			<form-property name="txtDatFim" type="java.lang.String" />
+			<form-property name="txtTipoMsg" type="java.lang.String" />
+			<form-property name="txtAssunto" type="java.lang.String" />
+			<form-property name="ordenacao" type="java.lang.String" />
+			<form-property name="txtProtocolo" type="java.lang.String" />			
+		</form-bean>
+
+		<form-bean dynamic="true" name="RecuperaCodigoAcessoForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="numeroProtocolo" type="java.lang.Integer" />
+			<form-property name="formaRecuperacao" type="java.lang.Integer" />
+			<form-property name="campoObrigatorio" type="java.lang.String" />
+			<form-property name="respostaUsuario" type="java.lang.String" />
+			<form-property name="action" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Consultar Banco de Scripts -->
+		<form-bean dynamic="true" name="ListarBancoScriptsForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="txtBusca" type="java.lang.String" />
+			<form-property name="txtAssunto" type="java.lang.String" />
+			<form-property name="chkAtivoBanco" type="java.lang.String" />
+			<form-property name="chkInativoBanco" type="java.lang.String" />
+		</form-bean>
+
+		<!-- Listar Acionamento para Resposta -->
+		<form-bean dynamic="true" name="ListarAcionamentoRespostaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="numeroProtocolo" type="java.lang.String" />
+			<form-property name="meioEnvioResposta" type="java.lang.String" />
+			<form-property name="enviado" type="java.lang.String" />
+			<form-property name="naoEnviado" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="AtualizarAcionamentoRespostaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="numeroProtocolo" type="java.lang.String" />
+			<form-property name="meioEnvioResposta" type="java.lang.String" />
+			<form-property name="enviado" type="java.lang.String" />
+			<form-property name="naoEnviado" type="java.lang.String" />
+			<form-property name="atualiza" type="java.lang.String[]" />
+		</form-bean>
+
+		<!-- Action Form para confirmação da resposta ao acionamento  -->
+		<form-bean dynamic="true" name="ConfirmaRespostaForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="idAcionamento" type="java.lang.String" />
+			<form-property name="idRemetenteRedirec" type="java.lang.String" />
+			<form-property name="txtTitulo" type="java.lang.String" />
+			<form-property name="txtResposta" type="java.lang.String" />
+			<form-property name="txtAcao" type="java.lang.String" />
+			<form-property name="idSolucao" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="RedirecionarMensagemForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="subOrgao" type="java.lang.Integer" />
+			<form-property name="localidadeOcorrencia" type="java.lang.Integer" />
+			<form-property name="assunto" type="java.lang.Integer" />
+			<form-property name="tipoRedirecionamento" type="java.lang.String" />
+			<form-property name="despacho" type="java.lang.String" />
+			<form-property name="titulo" type="java.lang.String" />
+			<form-property name="consultor" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="ReclassificarMensagemForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="assunto" type="java.lang.Integer" />
+			<form-property name="tipoMensagem" type="java.lang.Long" />
+		</form-bean>
+
+
+		<!-- Enviar Email -->
+		<form-bean dynamic="true" name="EnviarEmailForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="idAcionamento" type="java.lang.Integer" />
+			<form-property name="email" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="true" name="consultarAndamentoSolucaoForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="txt_periodo_i" initial="" type="java.lang.String" />
+			<form-property name="txt_periodo_f" initial="" type="java.lang.String" />
+			<form-property name="sel_ouvidoria" initial="" type="java.lang.String" />
+			<form-property name="sel_assunto" initial="" type="java.lang.String" />
+			<form-property name="sel_tipo_mensagem" initial="" type="java.lang.String" />
+			<form-property name="txt_protocolo" initial="" type="java.lang.String" />
+			<form-property name="txt_palavra_chave" initial="" type="java.lang.String" />
+			<form-property name="sel_situacao_mensagem" initial="" type="java.lang.String" />
+		</form-bean>
+
+	</form-beans>
+
+	<global-exceptions>
+
+		<exception handler="br.gov.serpro.ouvidoria.struts.CustomExceptionHandler" scope="request" type="java.lang.Throwable" key="ouvidoria.error" />
+
+	</global-exceptions>
+
+	<global-forwards>
+
+		<forward name="welcome" path="/MainInternet.do" />
+
+		<forward name="failure" path="/pages/Error.jsp" redirect="false" contextRelative="true" />
+
+		<forward name="error" path="/pages/Error.jsp" redirect="false" contextRelative="true" />
+
+		<forward name="exception" path="/pages/GlobalException.jsp" redirect="false" contextRelative="true" />
+
+		<forward name="vazio" path="/Vazio.do" />
+
+	</global-forwards>
+
+	<action-mappings>
+
+		<!-- Ações de consulta ao banco de soluções -->
+		<action path="/Vazio" type="org.apache.struts.actions.ForwardAction" parameter="/pages/andamento/_blank.htm" />
+
+		<action attribute="ConsultaSolucoesForm" 
+				name="ConsultaSolucoesForm" 
+				path="/ConsultaSolucoes" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarSolucaoAction" 
+				unknown="false" 
+				validate="false" 
+				roles="13">
+
+			<forward 	name="success" 
+						path="/pages/andamento/ConsultaSolucoes.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+		</action>
+
+		<action attribute="ListaSolucoesForm" name="ListaSolucoesForm" path="/ListaSolucoes" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ListarSolucaoAction" unknown="false" validate="false" roles="13">
+			<forward name="success" path="/pages/andamento/ListaSolucoes.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action path="/ExibeSolucao" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirSolucaoAction" unknown="false" validate="false" roles="13">
+			<forward name="success" path="/pages/andamento/ExibeSolucao.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<!-- Ações de consulta resposta pelo acionador ou pelo atendente -->
+		<action path="/ConsultarResposta" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarRespostaAction" unknown="false" validate="false" roles="1">
+			<forward name="success" path="/pages/andamento/ConsultarResposta.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="ExibirRespostaForm" name="ExibirRespostaForm" path="/ExibirResposta" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirRespostaAction" unknown="false" validate="false" roles="1">
+			<forward name="success" path="/pages/andamento/ExibirResposta.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="AvaliarRespostaForm" name="AvaliarRespostaForm" path="/AvaliarResposta" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.AvaliarRespostaAction" unknown="false" validate="false" roles="1">
+			<forward name="success" path="/pages/andamento/ExibirMsgAvaliacaoCadastrada.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<!-- Ações de consulta a mensagens por responsabilidade -->
+		<action path="/ConsultaMsgPorRespons" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarMsgPorResponsAction" 
+				unknown="false" 
+				validate="false" 
+				roles="11">
+
+			<forward 	name="success" 
+						path="/pages/andamento/ConsultaMsgPorRespons.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+		</action>
+
+		<action attribute="ListaMsgForm" 
+				name="ListaMsgForm" 
+				path="/ListaMsgPorRespons" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ListarMsgPorResponsAction" 
+				unknown="false" 
+				validate="false" 
+				roles="11">
+
+			<forward 	name="success" 
+						path="/pages/andamento/ListaMsgPorRespons.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+		</action>
+
+		<action path="/ExibeMsgPorRespons" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirMsgPorResponsAction" unknown="false" validate="false" roles="11">
+
+			<forward name="success" path="/pages/andamento/ExibeMsgPorRespons.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="ConfirmaRespostaForm" 
+				name="ConfirmaRespostaForm" 
+				path="/ConfirmaResposta" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ConfirmarRespostaAction" 
+				unknown="false" 
+				validate="false" 
+				roles="11">
+
+			<forward 	name="success" 
+						path="/pages/andamento/ConfirmaResposta.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+						
+		</action>
+
+		<action attribute="ConfirmaRespostaForm" 
+				name="ConfirmaRespostaForm" 
+				path="/RespondeAcionamento" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ResponderMsgAction" 
+				unknown="false" 
+				validate="false" 
+				roles="36">
+
+			<forward 	name="success" 
+						path="/pages/andamento/ExibeMsg.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+		</action>
+
+		<action attribute="ConfirmaRespostaForm" name="ConfirmaRespostaForm" path="/SalvaRascunhoResp" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.SalvarRascunhoRespAction" unknown="false" validate="false" roles="11">
+
+			<forward name="success" path="/pages/andamento/ExibeMsg.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<!-- Ações de Recuperar código de acesso -->
+		<action path="/RecuperaCodigoAcesso" type="org.apache.struts.actions.ForwardAction" parameter="/pages/andamento/RecuperaCodigoAcesso.jsp" roles="3" />
+
+		<action attribute="RecuperaCodigoAcessoForm" name="RecuperaCodigoAcessoForm" path="/RecuperaCodigoAcessoSubmit" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.RecuperarCodigoAcessoAction" unknown="false" validate="false"
+			parameter="action" roles="3">
+
+			<forward name="exibirOpcoes" path="/pages/andamento/RecuperaCodigoAcessoOpcao.jsp" redirect="false" contextRelative="true" />
+
+			<forward name="campoValidacao" path="/pages/andamento/RecuperaCodigoAcessoSubmit.jsp" redirect="false" contextRelative="true" />
+
+			<forward name="exibirEmailEnviado" path="/pages/andamento/ExibirMsgEmailEnviado.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<action attribute="RecuperaCodigoAcessoForm" name="RecuperaCodigoAcessoForm" path="/RecuperaCodigoAcessoTela" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.RecuperarCodigoAcessoSubmitAction" unknown="false" validate="false"
+			roles="3">
+
+
+			<forward name="success" path="/pages/andamento/ExibirCodigoAcesso.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<!-- Ações de Consultar Script do Especialista (Banco de Scripts) -->
+		<action path="/ConsultarBancoScripts" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarBancoScriptsAction" unknown="false" validate="false" roles="14">
+			<forward name="success" path="/pages/andamento/ConsultarBancoScripts.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<!-- Ações de Consultar Script do Especialista (Banco de Scripts) a partir da mensagem -->
+		<action path="/ConsultarBancoScriptsMsg" scope="request" type="br.gov.serpro.ouvidoria.struts.action.acionamento.ConsultarScriptAction" unknown="false" validate="false" roles="14">
+			<forward name="success" path="/pages/andamento/ConsultarBancoScriptsMsg.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="ListarBancoScriptsForm" name="ListarBancoScriptsForm" path="/ListarBancoScripts" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ListarBancoScriptsAction" unknown="false" validate="false" roles="14">
+			<forward name="success" path="/pages/andamento/ListarBancoScripts.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action path="/ExibirBancoScripts" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirBancoScriptsAction" unknown="false" validate="false" roles="14">
+			<forward name="success" path="/pages/andamento/ExibirBancoScripts.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<!-- LISTAR ACIONAMENTO PARA RESPOSTA -->
+		<action path="/ConsultarAcionamentoResposta" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarAcionamentoRespostaAction" 
+				unknown="false" 
+				validate="false" 
+				roles="43">
+				
+			<forward 	name="success" 
+						path="/pages/andamento/ConsultarAcionamentoResposta.jsp" 
+						redirect="false" 
+						contextRelative="true" />
+		</action>
+
+		<action attribute="ListarAcionamentoRespostaForm" 
+				name="ListarAcionamentoRespostaForm" 
+				input="/andamento/ConsultarAcionamentoResposta.do" 
+				path="/ListarAcionamentoResposta" scope="request"
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.ListarAcionamentoRespostaAction" 
+				unknown="false" validate="true" roles="43">
+
+			<forward name="success" 
+					path="/pages/andamento/ListarAcionamentoResposta.jsp" 
+					redirect="false" 
+					contextRelative="true" />
+
+		</action>
+
+		<action attribute="AtualizarAcionamentoRespostaForm" name="AtualizarAcionamentoRespostaForm" path="/AtualizarAcionamentoResposta" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.AtualizarAcionamentoRespostaAction"
+			unknown="false" validate="false" roles="43">
+
+			<forward name="success" path="/andamento/ListarAcionamentoResposta.do" redirect="false" contextRelative="true" />
+
+		</action>
+		<action attribute="ReclassificarMensagemForm" name="ReclassificarMensagemForm" path="/ReclassificarMensagem" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.TelaReclassificarMensagemAction" unknown="false" roles="44,56"
+			validate="false">
+
+			<forward name="success" path="/pages/andamento/ReclassificarMensagem.jsp" redirect="false" contextRelative="true" />
+
+			<forward name="mensagem" path="/pages/ExibeMsg.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<action attribute="ReclassificarMensagemForm" name="ReclassificarMensagemForm" path="/ConfirmaReclassificarMensagem" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ReclassificarMensagemAction" unknown="false" roles="44,56"
+			validate="false">
+
+			<forward name="success" path="/andamento/ReclassificarMensagem.do" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<action path="/ExibirAcionamentoResposta" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirAcionamentoRespostaAction" unknown="false" validate="false" roles="43">
+
+			<forward name="success" path="/pages/andamento/ExibirAcionamentoResposta.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<!-- Ações de Enviar Resposta por Email-->
+		<action path="/ExibirEmail" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ExibirEmailAction" unknown="false" validate="false" roles="6">
+			<forward name="success" path="/pages/andamento/EnviarEmail.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="EnviarEmailForm" name="EnviarEmailForm" path="/EnviarEmail" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.EnviarEmailAction" unknown="false" validate="false" roles="6">
+
+			<forward name="success" path="/pages/andamento/ExibirMsgEmailEnviado.jsp" redirect="false" contextRelative="true" />
+		</action>
+
+		<action attribute="RedirecionarMensagemForm" name="RedirecionarMensagemForm" path="/RedirecionarMensagem" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.TelaRedirecionarMensagemAction" unknown="false" validate="false"
+			roles="12">
+			<forward name="success" path="/pages/andamento/RedirecionarMensagem.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+	
+		<action attribute="RedirecionarMensagemForm" 
+				name="RedirecionarMensagemForm" 
+				path="/ConfirmaRedirecionarMensagem" 
+				scope="request" 
+				type="br.gov.serpro.ouvidoria.struts.action.andamento.RedirecionarMensagemAction" 
+				unknown="false" 
+				roles="12"
+			validate="false">
+
+			<forward name="success" path="/andamento/RedirecionarMensagem.do" redirect="false" contextRelative="true" />
+
+		</action>
+
+
+		<!-- Caso de uso Consultar Andamento Solução -->
+		<action path="/consultarAndamentoSolucao" name="consultarAndamentoSolucaoForm" attribute="consultarAndamentoSolucaoForm" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarAndamentoSolucaoControllerAction"
+			unknown="false" validate="false" roles="45">
+
+			<forward name="success" path="/pages/andamento/consultarAndamentoSolucao.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<action path="/consultarAndamentoSolucaoSearch" name="consultarAndamentoSolucaoForm" attribute="consultarAndamentoSolucaoForm" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarAndamentoSolucaoAction" unknown="false"
+			validate="false" roles="45">
+
+			<forward name="success" path="/pages/andamento/consultarAndamentoSolucao-results.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<action path="/consultarAndamentoSolucaoDetail" name="consultarAndamentoSolucaoForm" attribute="consultarAndamentoSolucaoForm" scope="request" type="br.gov.serpro.ouvidoria.struts.action.andamento.ConsultarAndamentoSolucaoDetailAction"
+			unknown="false" validate="false" roles="45">
+
+			<forward name="success" path="/pages/andamento/consultarAndamentoSolucao-detail.jsp" redirect="false" contextRelative="true" />
+
+		</action>
+
+		<!-- FIM Caso de uso -->
+
+	</action-mappings>
+
+	<controller processorClass="br.gov.serpro.ouvidoria.struts.CustomRequestProcessor" contentType="text/html" />
+
+	<message-resources parameter="resources.application" />
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>

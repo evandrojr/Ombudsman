@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sistema de Ouvidoria: um canal através do qual os usuários
+ podem encaminhar suas reclamações, elogios e sugestões.
+ 
+ Copyright (C) 2011 SERPRO
+ 
+ Este programa é software livre; você pode redistribuí-lo e/ou
+ modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+ publicada pela Free Software Foundation; tanto a versão 2 da
+ Licença como (a seu critério) qualquer versão mais nova.
+ 
+ Este programa é distribuído na expectativa de ser útil, mas SEM
+ QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ detalhes.
+ 
+ Você deve ter recebido uma cópia da Licença Pública Geral GNU,
+ sob o título "LICENCA.txt", junto com esse programa. Se não,
+ acesse o Portal do Software Público Brasileiro no endereço
+ http://www.softwarepublico.gov.br/ ou escreva para a Fundação do
+ Software Livre (FSF) Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA 02111-1301, USA.
+ 
+ Contatos através do seguinte endereço internet:
+ http://www.serpro.gov.br/sistemaouvidoria/
+-->
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+    <form-beans>
+
+        <form-bean dynamic="true" name="LoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="login" type="java.lang.String" />
+            <form-property name="senha" type="java.lang.String" />
+            <form-property name="textoCertificado" type="java.lang.String" />
+        </form-bean>
+
+        <form-bean dynamic="true" name="AlterarSenhaForm" type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="login" type="java.lang.String" />
+            <form-property name="senhaAntiga" type="java.lang.String" />
+            <form-property name="senhaNova" type="java.lang.String" />
+            <form-property name="senhaNovaConfirmacao" type="java.lang.String" />
+        </form-bean>
+
+    </form-beans>
+
+    <global-exceptions>
+
+        <exception handler="br.gov.serpro.ouvidoria.struts.CustomExceptionHandler" scope="request" type="java.lang.Throwable" key="ouvidoria.error" />
+
+    </global-exceptions>
+
+
+    <global-forwards>
+
+        <forward name="welcome" path="/MainInternet.do" />
+        <!-- DEBUG - para acesso default "intranet"
+        <forward name="welcome" path="/MainIntranet.do" />
+        -->
+
+        <forward name="login" path="/Login.do?action=exibir" />
+
+        <forward name="failure" path="/pages/Error.jsp" redirect="false" contextRelative="false" />
+
+        <forward name="error" path="/pages/Error.jsp" redirect="false" contextRelative="true" />
+
+        <forward name="exception" path="/pages/GlobalException.jsp" redirect="false" contextRelative="false" />
+
+    </global-forwards>
+
+    <action-mappings>
+
+        <!-- ABOUT:BLANK -->
+        <action path="/Vazio" type="org.apache.struts.actions.ForwardAction" parameter="/pages/_blank.htm" />
+
+        <!-- DENIED ACESS -->
+        <action path="/DeniedAccess" type="org.apache.struts.actions.ForwardAction" parameter="/pages/DeniedAccess.jsp" />
+
+        <!-- WELCOME -->
+        <action path="/Welcome" type="org.apache.struts.actions.ForwardAction" parameter="/pages/Welcome.jsp" />
+
+        <!-- HELP -->
+        <action path="/Ajuda" type="br.gov.serpro.ouvidoria.struts.action.AjudaAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/Ajuda.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <action path="/AjudaIndice" type="br.gov.serpro.ouvidoria.struts.action.AjudaIndiceAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/AjudaIndice.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <action path="/AjudaConteudo" type="br.gov.serpro.ouvidoria.struts.action.AjudaConteudoAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/AjudaConteudo.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <action path="/AjudaConsulta" type="br.gov.serpro.ouvidoria.struts.action.AjudaConsultaAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/AjudaResultado.jsp" redirect="false" contextRelative="true" />
+        </action>
+        <!-- Fim do HELP -->
+
+        <!-- MAIN -->
+        <action path="/Main" type="br.gov.serpro.ouvidoria.struts.action.MainAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/main.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- MAIN INTERNET -->
+        <action path="/MainInternet" type="br.gov.serpro.ouvidoria.struts.action.MainInternetAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/MainFrameInternet.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- MAIN INTRANET -->
+        <action path="/MainIntranet" type="br.gov.serpro.ouvidoria.struts.action.MainIntranetAction" unknown="false" validate="false" scope="request">
+
+            <forward name="success" path="/pages/MainFrameIntranet.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- MENU -->
+        <action path="/Menu" type="br.gov.serpro.ouvidoria.struts.action.MenuAction" unknown="false" validate="false">
+            <!-- method="origem" > -->
+
+            <forward name="internet" path="/pages/MenuInternet.jsp" redirect="false" contextRelative="true" />
+
+            <forward name="intranet" path="/pages/MenuIntranet.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- MENU JAVA SCRIPT-->
+        <action path="/MenuJavaScript" type="br.gov.serpro.ouvidoria.struts.action.MenuJsAction" unknown="false" validate="false">
+
+            <forward name="not_logged" path="/pages/MenuJSNotLogged.jsp" redirect="false" contextRelative="true" />
+
+        </action>
+
+        <action path="/MenuJavaScriptLogged" type="br.gov.serpro.ouvidoria.struts.action.MenuJsAction" unknown="false" validate="false">
+
+            <forward name="logged" path="/pages/MenuJS.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- LOGIN -->
+        <action attribute="LoginForm" name="LoginForm" input="/pages/Login.jsp" path="/Login" type="br.gov.serpro.ouvidoria.struts.action.LoginAction" scope="request" parameter="action" unknown="false" validate="false" roles="2">
+
+            <forward name="exibir" path="/pages/Login.jsp" redirect="false" contextRelative="true" />
+
+            <forward name="exibirCertificado" path="/pages/LoginCertificado.jsp" redirect="false" contextRelative="true" />
+
+            <forward name="success" path="/pages/reload.htm" redirect="false" contextRelative="true" />
+
+            <forward name="error" path="/Login.do?action=exibir" redirect="false" contextRelative="true" />
+        </action>
+
+        <action path="/CertificadoDigital" type="br.gov.serpro.ouvidoria.struts.action.CertificadoDigitalAction" scope="request" unknown="false" validate="false" roles="2">
+
+            <forward name="success" path="/pages/reload.htm" redirect="false" contextRelative="true" />
+
+            <forward name="error" path="/pages/LoginCertificado.jsp" redirect="false" contextRelative="true" />
+
+        </action>
+
+        <!-- ALTERA SENHA -->
+        <action path="/AlterarSenha" type="org.apache.struts.actions.ForwardAction" parameter="/pages/AlterarSenha.jsp" />
+
+        <action attribute="AlterarSenhaForm" name="AlterarSenhaForm" input="/AlterarSenha.do" path="/AlterarSenhaSubmit" scope="request" type="br.gov.serpro.ouvidoria.struts.action.AlterarSenhaAction" unknown="false" roles="2" validate="true">
+
+            <forward name="success" path="/pages/reload.htm" redirect="false" contextRelative="true" />
+
+            <forward name="error" path="/AlterarSenha.do" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- LOGOFF -->
+        <action path="/Logoff" type="br.gov.serpro.ouvidoria.struts.action.LogoffAction" unknown="false" validate="false">
+
+            <forward name="success" path="/pages/reload.htm" redirect="true" contextRelative="true" />
+        </action>
+
+        <!-- EXIBICAO DE TELAS GENERICAS (TITULO + TEXTO) -->
+        <action path="/ExibirMensagemGenerica" type="br.gov.serpro.ouvidoria.struts.action.ExibirMensagemGenericaAction" unknown="false" scope="request" validate="false">
+
+            <forward name="success" path="/pages/ExibirMensagemGenerica.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+        <!-- RESULTADOS DA OUVIDORIA (TITULO + TEXTO + LISTA DE BOLETINS PUBLICADOS) -->
+        <action path="/ExibirResultadoOuvidoria" type="br.gov.serpro.ouvidoria.struts.action.ExibirResultadoOuvidoriaAction" unknown="false" scope="request" validate="false">
+
+            <forward name="success" path="/pages/ExibeResultadoOuvidoria.jsp" redirect="false" contextRelative="true" />
+        </action>
+
+    </action-mappings>
+
+    <controller processorClass="br.gov.serpro.ouvidoria.struts.CustomRequestProcessor" contentType="text/html" />
+
+    <message-resources parameter="resources.application" />
+
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+    </plug-in>
+    
+</struts-config>
